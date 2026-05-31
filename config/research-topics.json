@@ -1,0 +1,96 @@
+{
+  "_comment": "Research Scout configuration — tracked topics, keywords, and hashtags",
+
+  "perplexity_queries": [
+    "creator economy news this week funding acquisitions platform changes",
+    "Instagram algorithm update creators 2025 2026",
+    "TikTok creator monetization policy changes news",
+    "YouTube creator economy updates partner program changes",
+    "LinkedIn creator tools updates thought leadership trends",
+    "AI tools for content creators new launches 2025 2026",
+    "personal branding trends creator entrepreneurs",
+    "content creator burnout mental health community discussions",
+    "creator economy jobs roles emerging specializations",
+    "brand partnerships influencer marketing trends 2026",
+    "newsletter creator economy trends Beehiiv Substack Kit",
+    "social media platform algorithm changes creators",
+    "short form video trends Instagram Reels TikTok YouTube Shorts",
+    "creator owned businesses products digital entrepreneurs",
+    "content repurposing AI automation tools creators",
+    "community building creators Discord platforms",
+    "creator economy regulatory news taxes legal",
+    "podcasting trends indie creators growth monetization",
+    "video editing AI tools creators workflow",
+    "personal brand building strategies frameworks 2026"
+  ],
+
+  "linkedin_keywords": [
+    "creator economy",
+    "personal branding content creator",
+    "AI tools creators",
+    "content strategy creator",
+    "creator burnout",
+    "newsletter growth creators",
+    "social media strategy 2026",
+    "creator monetization"
+  ],
+
+  "instagram_hashtags": [
+    "creatorseconomy",
+    "personalbranding",
+    "contentcreator",
+    "creatorlife",
+    "contentmarketing",
+    "creatortips",
+    "ugccreator",
+    "creativebusiness"
+  ],
+
+  "tiktok_hashtags": [
+    "creatortips",
+    "contentcreatortips",
+    "creatoreconomy",
+    "personalbranding",
+    "howtogrowyourbrand",
+    "contentcreation",
+    "creatorlife",
+    "ugccreator"
+  ],
+
+  "priority_keywords": [
+    "creator economy",
+    "personal brand",
+    "content creator",
+    "Cre8te",
+    "creative entrepreneur",
+    "UGC creator",
+    "newsletter creator",
+    "AI creator tools"
+  ],
+
+  "workshop_signal_keywords": [
+    "how do I",
+    "struggling with",
+    "need help",
+    "can anyone explain",
+    "what tool do you use",
+    "tips for beginners",
+    "just starting out",
+    "overwhelmed by"
+  ],
+
+  "tracked_publications": [
+    "https://www.thecreatoreconomy.com/feed",
+    "https://creatoriq.com/blog/feed",
+    "https://www.tubefilter.com/feed/",
+    "https://influencermarketinghub.com/feed/"
+  ],
+
+  "content_clusters": {
+    "platform_updates": ["algorithm", "policy", "monetization", "creator fund", "partner program"],
+    "ai_tools": ["AI", "automation", "workflow", "editing tool", "content generation"],
+    "community_building": ["community", "engagement", "Discord", "cohort", "membership"],
+    "business_models": ["revenue", "sponsorship", "brand deal", "product", "course"],
+    "creative_craft": ["storytelling", "hook", "script", "video", "thumbnail", "caption"]
+  }
+}

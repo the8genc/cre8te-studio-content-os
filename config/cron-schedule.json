@@ -1,11 +1,51 @@
 {
   "agents": {
-    "ingester":          { "schedule": "0 6 * * *",   "description": "Daily 6am — scan Drive/Dropbox for new source files",              "script": "agents/01-ingester/ingester.py" },
-    "transcriber":       { "schedule": "0 7 * * *",   "description": "Daily 7am — process assets with Pending transcription status",     "script": "agents/02-transcriber/transcriber.py" },
-    "content_strategist":{ "schedule": "0 9 * * *",   "description": "Daily 9am — generate content ideas from newly processed assets",   "script": "agents/03-content-strategist/strategist.py" },
-    "content_writer":    { "schedule": "0 14 * * *",  "description": "Daily 2pm — write packages for Coda-approved ideas",              "script": "agents/04-content-writer/writer.py" },
-    "newsletter_editor": { "schedule": "0 20 * * 4",  "description": "Thursday 8pm — assemble weekly newsletter digest",                "script": "agents/05-newsletter-editor/newsletter.py" },
-    "publisher":         { "schedule": "0 8,12,17 * * *", "description": "3x daily — publish scheduled content and approved newsletters","script": "agents/06-publisher/publisher.py" },
-    "analyst":           { "schedule": "0 9 * * 1",   "description": "Monday 9am — pull prior week analytics, update Knowledge Base",    "script": "agents/07-analyst/analyst.py" }
+    "ingester": {
+      "schedule": "0 6 * * *",
+      "description": "Daily 6am \u2014 scan Drive/Dropbox for new source files",
+      "script": "agents/01-ingester/ingester.py"
+    },
+    "transcriber": {
+      "schedule": "0 7 * * *",
+      "description": "Daily 7am \u2014 process assets with Pending transcription status",
+      "script": "agents/02-transcriber/transcriber.py"
+    },
+    "content_strategist": {
+      "schedule": "0 9 * * *",
+      "description": "Daily 9am \u2014 generate content ideas from newly processed assets",
+      "script": "agents/03-content-strategist/strategist.py"
+    },
+    "content_writer": {
+      "schedule": "0 14 * * *",
+      "description": "Daily 2pm \u2014 write packages for Coda-approved ideas",
+      "script": "agents/04-content-writer/writer.py"
+    },
+    "newsletter_editor": {
+      "schedule": "0 20 * * 4",
+      "description": "Thursday 8pm \u2014 assemble weekly newsletter digest",
+      "script": "agents/05-newsletter-editor/newsletter.py"
+    },
+    "publisher": {
+      "schedule": "0 8,12,17 * * *",
+      "description": "3x daily \u2014 publish scheduled content and approved newsletters",
+      "script": "agents/06-publisher/publisher.py"
+    },
+    "analyst": {
+      "schedule": "0 9 * * 1",
+      "description": "Monday 9am \u2014 pull prior week analytics, update Knowledge Base",
+      "script": "agents/07-analyst/analyst.py"
+    },
+    "research_scout_daily": {
+      "schedule": "0 5 * * *",
+      "description": "Daily 5am \u2014 web/social intelligence sweep (runs before Ingester to seed day context)",
+      "script": "agents/08-research-scout/scout.py",
+      "mode": "daily"
+    },
+    "research_scout_weekly": {
+      "schedule": "0 6 * * 0",
+      "description": "Sunday 6am \u2014 deep scan, broader keyword sweep, weekly intelligence summary",
+      "script": "agents/08-research-scout/scout.py",
+      "mode": "deep"
+    }
   }
 }

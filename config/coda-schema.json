@@ -77,6 +77,26 @@
         "source": "c-vEurZMggXh",
         "tags": "c-fClv8exiV5"
       }
+    },
+    "research_intelligence": {
+      "table_id": "TBD_after_coda_creation",
+      "_note": "Table ID populated after Research Intelligence table is created in Coda",
+      "columns": {
+        "item_title": "c-ri-title",
+        "source_url": "c-ri-source-url",
+        "source_type": "c-ri-source-type",
+        "platform": "c-ri-platform",
+        "summary": "c-ri-summary",
+        "raw_excerpt": "c-ri-raw-excerpt",
+        "relevance_score": "c-ri-relevance",
+        "novelty_score": "c-ri-novelty",
+        "actionability": "c-ri-actionability",
+        "final_score": "c-ri-final-score",
+        "use_case_tags": "c-ri-use-case-tags",
+        "priority_flag": "c-ri-priority",
+        "date_scouted": "c-ri-date-scouted",
+        "used_by": "c-ri-used-by"
+      }
     }
   }
 }
