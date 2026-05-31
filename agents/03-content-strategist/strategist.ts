@@ -14,11 +14,14 @@ const CI  = schema.tables.content_ideas;
 const KB  = schema.tables.brand_voice_kb;
 
 interface ContentAngle {
-  angle_title:   string;
-  angle_desc:    string;
-  best_platforms: string[];
-  content_type:  string;
-  source_quote:  string;
+  angle_title:         string;
+  angle_desc:          string;
+  content_bucket:      'Growth' | 'Authority' | 'Conversion';
+  best_platforms:      string[];
+  content_type:        string;
+  linkedin_framework:  'AIDA' | 'PAS' | 'StoryArc';
+  recommended_cta:     string;
+  source_quote:        string;
 }
 
 async function getKnowledgeBase(): Promise<string> {
@@ -48,25 +51,52 @@ async function generateAngles(asset: CodaRow, kbContext: string): Promise<Conten
   const system = `You are a content strategist for Cre8te Studio — a community-first platform
 for creative entrepreneurs and content creators. Your job is to find the most compelling,
 specific, and distinct content angles in a transcript. Every angle must reference something
-SPECIFIC from the transcript (a quote, a named concept, a story moment). No generic angles.`;
+SPECIFIC from the transcript (a quote, a named concept, a story moment). No generic angles.
+
+CONTENT BUCKET SYSTEM:
+Assign every angle to one of three buckets. Target mix across a week: 40% Growth, 40% Authority, 20% Conversion.
+- Growth: broad relatable problems, personal stories with universal lessons, contrarian takes, simple frameworks. Goal: reach and shares.
+- Authority: systems breakdowns, playbooks, case studies, tool stacks, teardowns. Goal: saves and bookmarks. HIGH-PRIORITY — saves drive algorithm right now.
+- Conversion: offer-adjacent posts, objection handling, keyword CTA opportunities, before/after outcomes. Goal: DMs and subscribers.`;
 
   const user = `Read this transcript from a Cre8te Studio ${sourceType} featuring ${speaker}.
 Extract 5-8 specific, distinct content angles.
 
 For each angle return JSON with:
-- angle_title: 1-sentence hook that makes someone want to engage
-- angle_desc: why this is compelling and what makes it specific (2 sentences)
-- best_platforms: array of 1-4 platforms from [Instagram, YouTube, LinkedIn, TikTok, Facebook, Newsletter]
+- angle_title: hook in 8-12 words. Use one of these proven patterns:
+    "Contrarian Take" → challenge assumption directly (e.g. "Your algorithm issue is actually a positioning issue...")
+    "Stop/Start" → contrast old vs new behaviour
+    "Number + Result" → specific metric + timeframe
+    "Story + Unexpected" → personal moment with surprising outcome
+    "Playbook/System" → the audit/process/framework someone can steal
+    "Identity Challenge" → reframe how they see themselves
+  End with ellipsis or open loop to force expansion click.
+- angle_desc: why this angle is compelling and what makes it specific (2 sentences)
+- content_bucket: "Growth" | "Authority" | "Conversion"
+  Growth = relatable story/contrarian take/broad problem → drives reach and shares
+  Authority = framework/playbook/system/case study → drives saves (PRIORITY metric now)
+  Conversion = outcome/before-after/keyword CTA → drives DMs and sign-ups
+- best_platforms: array of 1-4 from [Instagram, YouTube, LinkedIn, TikTok, Facebook, Newsletter]
 - content_type: one of [Clip, Quote, Story, Article, Short, Carousel]
+- linkedin_framework: "AIDA" | "PAS" | "StoryArc"
+  AIDA = Conversion posts (hook→pain→better state→CTA)
+  PAS = Authority posts (name pain→cost of pain→fix)
+  StoryArc = Growth posts (setup→conflict→decision→outcome→lesson)
+- recommended_cta: specific CTA text matching the bucket
+  Growth → question or binary choice ("Which step are you trying first?")
+  Authority → save CTA ("Save this before your next post.")
+  Conversion → keyword reply ("Comment PLAYBOOK and I'll DM it to you.")
 - source_quote: exact words from the transcript that anchor this angle
 
-Angle types to look for:
-1. Standout quote (screenshot-worthy single sentence)
-2. Framework or model (2-5 step process or named concept)
-3. Story arc (challenge → insight → outcome)
-4. Community moment (shared reaction, relatable admission)
-5. Contrarian take (challenges conventional wisdom)
-6. Practical takeaway (specific, actionable today)
+Angle types to find:
+1. Standout quote (screenshot-worthy, emotionally resonant)
+2. Framework or model (named, 2-5 step, stealable)
+3. Story arc (challenge → insight → outcome — universal lesson)
+4. Community moment (shared reaction, relatable admission, audience pain)
+5. Contrarian take (challenges what creators believe to be true)
+6. Practical takeaway (specific, immediately actionable)
+
+Aim for: ~2 Growth angles, ~3 Authority angles, ~1 Conversion angle per asset (40/40/20 ratio).
 
 Return JSON array only, no other text.
 

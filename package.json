@@ -31,10 +31,11 @@
     "test:full-pipeline": "tsx tests/integration/test-full-pipeline.ts",
     "test:phase2": "tsx tests/run-phase2.ts",
     "test:phase3": "npx tsx tests/phase3/test-publisher.ts",
-    "test:integration": "npx tsx tests/integration/test-approval-loop.ts && npx tsx tests/integration/test-full-pipeline.ts"
+    "test:integration": "npx tsx tests/integration/test-approval-loop.ts && npx tsx tests/integration/test-full-pipeline.ts",
+    "add-playbook-columns": "tsx scripts/add-playbook-columns.ts"
   },
   "dependencies": {
-    "dotenv": "^16.0.0",
+    "dotenv": "^16.6.1",
     "googleapis": "^140.0.0"
   },
   "devDependencies": {

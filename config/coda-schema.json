@@ -25,8 +25,12 @@
         "content_type": "c-sYkxbAJAKQ",
         "approval_status": "c-dcjrrahkRo",
         "approver_notes": "c-tu_CzYn-d2",
-        "approved_date": "c-8y_6CIOk82"
-      }
+        "approved_date": "c-8y_6CIOk82",
+        "content_bucket": "c-content-bucket-TBD",
+        "linkedin_framework": "c-linkedin-framework-TBD",
+        "recommended_cta": "c-recommended-cta-TBD"
+      },
+      "_new_columns_note": "content_bucket, linkedin_framework, recommended_cta were added to the code but need to be created in Coda. Column IDs marked TBD must be updated after running: npm run add-playbook-columns (or adding manually and updating this file)"
     },
     "content_packages": {
       "table_id": "grid-Tdc2ZycQ_i",

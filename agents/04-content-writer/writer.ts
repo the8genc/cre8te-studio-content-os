@@ -23,6 +23,13 @@ interface ContentPackage {
   newsletter_blurb:  string;
 }
 
+// Extracted from idea row — drives framework and CTA selection
+interface ContentContext {
+  bucket:     string;   // Growth | Authority | Conversion
+  framework:  string;   // AIDA | PAS | StoryArc
+  cta:        string;   // recommended CTA text from strategist
+}
+
 async function getKBContext(): Promise<string> {
   const rows = await getRows(KB.table_id, undefined, 50);
   return rows
@@ -36,7 +43,7 @@ async function getSourceAsset(assetId: string): Promise<CodaRow | null> {
   return rows.find(r => r.id === assetId) ?? null;
 }
 
-async function generatePackage(idea: CodaRow, transcript: string, kbContext: string): Promise<ContentPackage> {
+async function generatePackage(idea: CodaRow, transcript: string, kbContext: string, ctx: ContentContext): Promise<ContentPackage> {
   const angleText = String(idea.values[CI.columns.content_angle]?.value ?? '');
   const platforms = String(idea.values[CI.columns.platform_targets]?.value ?? '');
 
@@ -47,9 +54,45 @@ async function generatePackage(idea: CodaRow, transcript: string, kbContext: str
   const system = `You are the lead content writer for Cre8te Studio. You write community-first
 content grounded in specific moments from real conversations. You never write generic AI content.
 Every script must reference something specific from the transcript — a quote, a named moment,
-a real person's insight. Brand voice: inspirational, warm, specific, never corporate.`;
+a real person's insight. Brand voice: inspirational, warm, specific, never corporate.
+
+CONTENT BUCKET RULES — apply based on the bucket provided:
+
+Growth (bucket: drives reach, shares, new followers):
+- Lead with the relatable story or contrarian take
+- Hook pattern: StoryArc (Setup→Conflict→Decision→Outcome→Lesson, 1-2 sentences per beat)
+- CTA: question or binary choice to spark replies ("Which step are you trying first?")
+
+Authority (bucket: drives saves, trust, expert positioning):
+- Lead with the insight or framework — state it plainly in the hook
+- Hook pattern: PAS (name the pain, give cost of pain in concrete terms, offer the fix)
+- CTA: ALWAYS a save CTA ("Save this before your next post.") — saves are the #1 metric right now
+- These posts are bookmarked, not always liked — design for saves not reactions
+
+Conversion (bucket: drives DMs, subscribers, clients):
+- Lead with the outcome or before/after
+- Hook pattern: AIDA (sharp hook, prove the pain, paint better state, CTA)
+- CTA: keyword reply that drives comment volume and DM conversations ("Comment [WORD] and I'll send it to you")
+
+HOOK RULES (all platforms):
+- 8-12 words. Simple verbs with slight tension.
+- End with ellipsis or open loop — force the reader to expand
+- Draft the body first, then mine the hook from the middle of the post
+- If the hook needs context to make sense, it is not a hook
+
+LINKEDIN SPECIFIC:
+- Never start with "I"
+- No em-dashes anywhere in the post
+- 3 hashtags max
+- 210 chars visible before "see more" — the hook IS the ad
+- Apply the ${ctx.framework} framework for this post's structure`;
 
   const user = `Write a complete content package for this approved angle.
+
+CONTENT CONTEXT:
+- Bucket: ${ctx.bucket} — ${ctx.bucket === 'Growth' ? 'optimize for reach and shares' : ctx.bucket === 'Authority' ? 'optimize for saves and bookmarks — PRIORITY METRIC' : 'optimize for DMs and conversions'}
+- LinkedIn framework: ${ctx.framework}
+- Recommended CTA: ${ctx.cta}
 
 CONTENT ANGLE:
 ${angleText}
@@ -79,9 +122,12 @@ Write all 6 outputs. Return JSON only:
 VOICE RULES:
 - Ground every script in the specific transcript moment (quote or direct reference)
 - Use the speaker's actual phrasing where possible
-- Never start with: "In today's world", "Have you ever wondered", "At the end of the day"
-- LinkedIn: never start with "I", no em-dashes
-- TikTok: hook must land in first 2 seconds — most surprising or specific line`;
+- Never write: "In today's world", "Have you ever wondered", "At the end of the day"
+- LinkedIn: never start with "I", no em-dashes, 3 hashtags max, apply ${ctx.framework} structure
+- TikTok: hook must land in first 2 seconds — most surprising or specific line
+- Authority posts on ALL platforms: end with a save CTA — not a like, not a comment, a save
+- Conversion posts: use keyword reply CTA format — drives comment volume + DMs
+- Growth posts: end with a question or binary choice to spark replies`;
 
   const raw = await claudeComplete(system, user, 4000);
   return parseJsonResponse<ContentPackage>(raw);
@@ -99,7 +145,14 @@ async function processIdea(idea: CodaRow, kbContext: string): Promise<void> {
   const transcript = String(asset.values[SA.columns.transcript]?.value ?? '');
   if (!transcript) { console.warn(`    SKIP: no transcript on source asset`); return; }
 
-  const pkg = await generatePackage(idea, transcript, kbContext);
+  // Extract bucket/framework/CTA context set by the Strategist
+  const ctx: ContentContext = {
+    bucket:    String(idea.values[CI.columns.content_bucket]?.value    ?? 'Authority'),
+    framework: String(idea.values[CI.columns.linkedin_framework]?.value ?? 'PAS'),
+    cta:       String(idea.values[CI.columns.recommended_cta]?.value   ?? 'Save this for your next content sprint.'),
+  };
+
+  const pkg = await generatePackage(idea, transcript, kbContext, ctx);
 
   await addRows(CP.table_id, [[
     { column: CP.columns.package_title,    value: pkg.package_title },

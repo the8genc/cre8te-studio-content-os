@@ -89,7 +89,20 @@ async function generateNewsletter(packages: Awaited<ReturnType<typeof getThisWee
 
   const system = `You are the newsletter editor for Cre8te Studio. You write warm, curated,
 community-first weekly email digests. Your voice: like a trusted community member writing
-to a close-knit group of creative entrepreneurs. Specific, warm, insider. Never corporate.`;
+to a close-knit group of creative entrepreneurs. Specific, warm, insider. Never corporate.
+
+SUBJECT LINE RULES:
+- ≤60 chars. Test against these proven patterns:
+  Contrarian → "The advice everyone gives that's actually wrong"
+  Specific claim → "How [name] hit [specific metric] with [surprising method]"
+  Curiosity gap → "What happened when we tried [unexpected thing]"
+  Community signal → reference 'this week', 'our community', 'what we captured'
+- Never: generic ("This week in content"), clickbait, or promises you don't keep inside
+
+NEWSLETTER SAVE-WORTHINESS:
+- Include at least one section the reader will want to screenshot or save
+- Authority content = frameworks, systems, checklists — write them to be save-worthy
+- Label save-worthy sections clearly so readers know to bookmark them`;
 
   const user = `Write a complete weekly newsletter digest for Cre8te Studio.
 
@@ -103,14 +116,21 @@ WHAT'S HAPPENING IN THE CREATOR ECONOMY (from our research this week):
 ${researchStories}
 
 Write the newsletter in this EXACT structure:
-1. Subject line (curiosity + community hook, ≤60 chars)
+1. Subject line (≤60 chars — choose the strongest from these options and write ONE:
+   a. Contrarian: challenge something creators believe
+   b. Specific metric: "[name] hit [number] with [surprising method]"
+   c. Curiosity gap: makes reader feel they'll miss something important
+   d. Community signal: "what we captured this week" / "our community is talking about")
 2. Preview text (completes the subject's thought, ≤90 chars)
 3. Hero section (2-3 sentences context + the insight + link placeholder [HERO_LINK])
-4. "This Week in Cre8te" (3-5 blurbs, each 1 sentence + [LINK_N] placeholder)
-5. "What's Happening in the Creator Economy" (2-3 sentences from research stories)
-6. Community Spotlight (draw from the supporting items for a testimonial-style moment)
-7. "What's Coming" (1-2 sentences teasing next week — keep vague but exciting)
-8. CTA (single clear action — join, attend, or share)
+4. "This Week in Cre8te" (3-5 blurbs — mark the most save-worthy one with 📌)
+5. "What's Happening in the Creator Economy" (2-3 sentences from research — include 1 actionable takeaway)
+6. Community Spotlight (testimonial-style moment from the community)
+7. "What's Coming" (1-2 sentences teasing next week)
+8. CTA — single clear action aligned to one of these:
+   - Grow the owned audience: "Subscribe / share this with one creator you know"
+   - Drive event attendance: "Register for [upcoming session]"
+   - Drive saves: "Bookmark this edition — section 4 is worth keeping"
 
 Format as plain text with clear section headers. Return as JSON:
 {

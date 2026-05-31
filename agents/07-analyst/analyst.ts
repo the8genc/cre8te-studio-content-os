@@ -17,6 +17,8 @@ interface PlatformMetrics {
   platform:        string;
   views_reach:     number;
   engagement_rate: number;
+  saves:           number;   // saves/bookmarks — priority metric per playbook
+  comments:        number;   // comments drive distribution more than likes
   top_comment:     string;
 }
 
@@ -28,7 +30,8 @@ interface PlatformMetrics {
 async function fetchInstagramMetrics(postUrl: string): Promise<PlatformMetrics | null> {
   // Instagram Graph API: GET /{media_id}/insights?metric=reach,impressions,engagement
   console.log(`    [Instagram Analytics] Would fetch: ${postUrl}`);
-  return null; // Replace with live API call
+  // When wired: fetch reach, engagement_rate, saves (bookmarks), comments
+  return null;
 }
 
 async function fetchLinkedInMetrics(postUrl: string): Promise<PlatformMetrics | null> {
@@ -60,12 +63,14 @@ async function fetchKitMetrics(broadcastId: string): Promise<PlatformMetrics | n
     headers: { 'Authorization': `Bearer ${process.env.KIT_API_KEY}` },
   });
   if (!res.ok) return null;
-  const data = await res.json() as { open_rate?: number; click_rate?: number };
+  const data = await res.json() as { open_rate?: number; click_rate?: number; subscribers_gained?: number };
   return {
     platform:        'Newsletter',
     views_reach:     0,
     engagement_rate: Number(data.open_rate ?? 0),
-    top_comment:     `Open rate: ${data.open_rate ?? 0}% | Click rate: ${data.click_rate ?? 0}%`,
+    saves:           0,  // newsletters don't have saves — use click_rate as proxy
+    comments:        0,
+    top_comment:     `Open: ${data.open_rate ?? 0}% | Clicks: ${data.click_rate ?? 0}% | New subs: ${data.subscribers_gained ?? 0}`,
   };
 }
 

@@ -5,16 +5,34 @@
       "hashtag_limit": 30,
       "hashtag_recommended": 5,
       "tone": "Hook first. Community feel. Reel-friendly pacing.",
-      "formats": ["Reel", "Carousel", "Static", "Story"],
+      "formats": [
+        "Reel",
+        "Carousel",
+        "Static",
+        "Story"
+      ],
       "hook_max_chars": 125,
-      "notes": "First 125 chars visible before more — make them count"
+      "notes": "First 125 chars visible before more \u2014 make them count",
+      "hook_rules": [
+        "First 125 chars are visible before 'more' \u2014 treat like a headline",
+        "Hook must stop the scroll before they read anything else"
+      ],
+      "cta_by_bucket": {
+        "Growth": "Question CTA \u2014 'Which one resonates most?'",
+        "Authority": "Save CTA \u2014 'Save this before you post again.'",
+        "Conversion": "Keyword CTA \u2014 'Comment [WORD] and I'll DM you the resource.'"
+      },
+      "priority_metric": "Saves drive distribution more than likes. End authority posts with save CTA."
     },
     "youtube": {
       "title_max_chars": 100,
       "description_max_chars": 5000,
       "hashtag_limit": 15,
       "tone": "Depth. Let it breathe. Clear value promise upfront.",
-      "formats": ["Long-form", "Short"],
+      "formats": [
+        "Long-form",
+        "Short"
+      ],
       "shorts_max_seconds": 60
     },
     "linkedin": {
@@ -22,22 +40,74 @@
       "hook_max_chars": 210,
       "hashtag_recommended": 3,
       "tone": "Thought leadership. Specific insight. No fluff.",
-      "formats": ["Text post", "Article", "Document", "Video"],
-      "notes": "210 chars visible before see more — lead with the insight"
+      "formats": [
+        "Text post",
+        "Article",
+        "Document",
+        "Video"
+      ],
+      "notes": "Notes: Never start with I. No em-dashes. 3 hashtags max. Hook \u2264210 chars before see more.",
+      "hook_word_count": "8-12 words",
+      "hook_rules": [
+        "Use simple verbs with slight tension",
+        "End with ellipsis or open loop to force expansion",
+        "Never start with 'I'",
+        "No em-dashes",
+        "If hook needs context it is not a hook \u2014 draft body first, mine hook from middle",
+        "210 chars visible before see more \u2014 the hook IS the ad"
+      ],
+      "hook_patterns": {
+        "contrarian_take": "This is your #1 content problem...",
+        "stop_start": "Stop posting tips. Start posting transformations...",
+        "myth_buster": "Your algorithm issue is actually a positioning issue...",
+        "number_result": "From 0 to 18 qualified DMs in 10 days (same posting schedule)...",
+        "personal_unexpected": "Last night I had dinner with LinkedIn's CEO...",
+        "how_i_without": "How I grew with no viral post. Here's how that works...",
+        "playbook_system": "The 20-minute audit I run before every post...",
+        "identity_challenge": "You're writing like a blog. LinkedIn is not a blog..."
+      },
+      "writing_frameworks": {
+        "AIDA": "Attention\u2192Interest\u2192Desire\u2192Action. Fast persuasive posts. Sharp hook, 1-2 lines proving pain, paint better state, CTA. Best for: Conversion bucket.",
+        "PAS": "Problem\u2192Agitate\u2192Solve. Name pain, give concrete cost (time/money/energy), offer simple fix. Best for: Authority posts leading to resource or offer.",
+        "StoryArc": "Setup\u2192Conflict\u2192Decision\u2192Outcome\u2192Lesson. 1-2 sentences per beat. Best for: Growth posts \u2014 career stories, client wins, failures, lessons."
+      },
+      "cta_by_bucket": {
+        "Growth": "Question CTA or Binary Choice \u2014 sparks replies and debate. Example: 'Which step are you trying first?' or 'Smart or lazy? Drop your take.'",
+        "Authority": "Save CTA \u2014 drives bookmarks. Example: 'Save this for your next content sprint.' PRIORITY: algorithm currently rewards saves over reactions.",
+        "Conversion": "Keyword Reply CTA \u2014 drives comment volume and DMs. Example: 'Comment ENGINE and I'll send you the playbook.'"
+      },
+      "priority_metric": "SAVES \u2014 algorithm currently rewards saves above reactions. Authority posts must always end with a save CTA.",
+      "hashtag_max": 3
     },
     "tiktok": {
       "caption_max_chars": 2200,
       "hashtag_recommended": 5,
       "tone": "Energy. Speed. Unexpected angle first.",
-      "formats": ["Short video", "Stitch", "Duet"],
+      "formats": [
+        "Short video",
+        "Stitch",
+        "Duet"
+      ],
       "max_seconds": 600,
-      "notes": "Hook must land in first 2 seconds"
+      "notes": "Hook must land in first 2 seconds",
+      "hook_timing": "Hook must land in first 2 seconds \u2014 use the most surprising or specific line",
+      "hook_rules": [
+        "0-2 seconds: most unexpected or specific claim",
+        "Script outline in bullet points, not paragraphs",
+        "Keep caption punchy \u2014 \u22645 words is ideal"
+      ]
     },
     "facebook": {
       "post_max_chars": 63206,
       "tone": "Community voice. Conversational. Invite response.",
-      "formats": ["Post", "Reel", "Story", "Event"],
-      "notes": "End with a question to drive comments"
+      "formats": [
+        "Post",
+        "Reel",
+        "Story",
+        "Event"
+      ],
+      "notes": "End with a question to drive comments",
+      "cta_rule": "Always end with an explicit engagement question \u2014 comments drive distribution"
     },
     "newsletter": {
       "subject_max_chars": 60,
@@ -47,12 +117,77 @@
       "send_time": "08:00",
       "structure": [
         "Subject line (curiosity + community hook)",
-        "Hero story — 1 featured piece with context",
-        "This Week in Cre8te — 3-5 supporting clips/posts",
-        "Community spotlight — testimonial or ITL moment",
-        "Whats Coming — upcoming pods/events teaser",
-        "CTA — join community / attend next event / share"
+        "Hero story \u2014 1 featured piece with context",
+        "This Week in Cre8te \u2014 3-5 supporting clips/posts",
+        "Community spotlight \u2014 testimonial or ITL moment",
+        "Whats Coming \u2014 upcoming pods/events teaser",
+        "CTA \u2014 join community / attend next event / share"
       ]
+    }
+  },
+  "content_buckets": {
+    "strategy": "Rotate intentionally across 3 buckets. Do not leave content mix to chance.",
+    "ratio": "40% Growth, 40% Authority, 20% Conversion",
+    "Growth": {
+      "goal": "Reach and discovery \u2014 attract new followers, trigger shares",
+      "what_works": [
+        "Broad problems your audience relates to",
+        "Personal stories with universal lessons",
+        "Contrarian takes that spark conversation",
+        "Simple frameworks people can apply immediately"
+      ],
+      "linkedin_framework": "StoryArc",
+      "cta": "Question or Binary Choice"
+    },
+    "Authority": {
+      "goal": "Trust and proof \u2014 position as expert, drive saves and bookmarks",
+      "what_works": [
+        "Systems breakdowns",
+        "How-to playbooks",
+        "Case studies",
+        "Tool stacks",
+        "Teardowns"
+      ],
+      "linkedin_framework": "PAS",
+      "cta": "Save CTA \u2014 PRIORITY metric right now"
+    },
+    "Conversion": {
+      "goal": "Leads and actions \u2014 move follower to subscriber/client/collaborator",
+      "what_works": [
+        "Offer-adjacent posts",
+        "Objection handling",
+        "Before/after outcomes",
+        "Keyword CTAs",
+        "Soft pitches with clear next step"
+      ],
+      "linkedin_framework": "AIDA",
+      "cta": "Keyword Reply CTA drives comment volume and DM conversations"
+    }
+  },
+  "weekly_kpis": {
+    "total_impressions": {
+      "track": "week-over-week",
+      "why": "Shows reach trajectory and algorithm health"
+    },
+    "engagement_rate": {
+      "target": "3-5%",
+      "why": "Higher = content resonating. Lower = topic or hook problem"
+    },
+    "comments": {
+      "target": "10+ per post",
+      "why": "Comments drive distribution more than likes"
+    },
+    "saves_bookmarks": {
+      "track": "trend upward",
+      "why": "High saves = authority content landing. PRIORITY metric"
+    },
+    "newsletter_signups": {
+      "track": "per post",
+      "why": "Bridge from social to owned audience"
+    },
+    "inbound_dms": {
+      "track": "weekly total",
+      "why": "Qualified conversations = revenue pipeline"
     }
   }
 }
