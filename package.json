@@ -3,22 +3,25 @@
   "version": "1.0.0",
   "description": "AI-powered content operating system for Cre8te Studio — 8 agents in TypeScript/Node",
   "type": "module",
-  "engines": { "node": ">=20.0.0" },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
-    "ingester":    "tsx agents/01-ingester/ingester.ts",
+    "ingester": "tsx agents/01-ingester/ingester.ts",
     "transcriber": "tsx agents/02-transcriber/transcriber.ts",
-    "strategist":  "tsx agents/03-content-strategist/strategist.ts",
-    "writer":      "tsx agents/04-content-writer/writer.ts",
-    "newsletter":  "tsx agents/05-newsletter-editor/newsletter.ts",
-    "publisher":   "tsx agents/06-publisher/publisher.ts",
-    "analyst":     "tsx agents/07-analyst/analyst.ts",
-    "scout":       "tsx agents/08-research-scout/scout.ts",
-    "pipeline":    "tsx agents/full-pipeline.ts",
-    "build":       "tsc",
-    "typecheck":   "tsc --noEmit"
+    "strategist": "tsx agents/03-content-strategist/strategist.ts",
+    "writer": "tsx agents/04-content-writer/writer.ts",
+    "newsletter": "tsx agents/05-newsletter-editor/newsletter.ts",
+    "publisher": "tsx agents/06-publisher/publisher.ts",
+    "analyst": "tsx agents/07-analyst/analyst.ts",
+    "scout": "tsx agents/08-research-scout/scout.ts",
+    "pipeline": "tsx agents/full-pipeline.ts",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "dotenv": "^16.0.0"
+    "dotenv": "^16.0.0",
+    "googleapis": "^140.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
