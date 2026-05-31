@@ -1,114 +1,102 @@
 # Cre8te Studio Content OS
 
-An always-on, AI-powered content operating system that turns Cre8te Summit recordings, mini pods, testimonials, and ITL sessions into a continuous stream of community-first content — automatically.
+An always-on, AI-powered content operating system for Cre8te Studio. Turns
+Summit recordings, mini pods, testimonials, and ITL sessions into a continuous
+stream of community-first content across Instagram, YouTube, LinkedIn, TikTok,
+Facebook, and a weekly email newsletter — automatically.
 
-## What This Does
+## Quick Start for New Collaborators
 
-A pipeline of 7 AI agents that run on Claude Code, triggered by cron and Coda approval gates:
+**Start here → [`context/PROJECT-BRIEF.md`](context/PROJECT-BRIEF.md)**
+
+It will direct you to everything else.
+
+## Context Files (read these first)
+
+| File | What it answers |
+|---|---|
+| [`context/PROJECT-BRIEF.md`](context/PROJECT-BRIEF.md) | What this system is and how it works |
+| [`context/STATUS.md`](context/STATUS.md) | What's built, what phase, what's working |
+| [`context/PENDING.md`](context/PENDING.md) | What needs to happen next, in priority order |
+| [`context/BUGS.md`](context/BUGS.md) | Known issues and their status |
+| [`context/AGENTS.md`](context/AGENTS.md) | Every agent — trigger, inputs, outputs, rules |
+| [`context/CODA-SCHEMA.md`](context/CODA-SCHEMA.md) | Every Coda table and column ID |
+
+## The Pipeline
 
 ```
-Ingest Raw Content → Transcribe (Fireflies) → Extract Content Angles →
-[HUMAN GATE: Coda approval] → Generate Platform Scripts →
-Assemble Weekly Newsletter → Publish (Postiz + Kit) →
-Analytics → Knowledge Base Update → Loop
+[5am]  Research Scout    → creator economy intel from web, LinkedIn, Instagram, TikTok
+[6am]  Ingester          → scan Google Drive for new recordings
+[7am]  Transcriber       → Fireflies API → transcript + speaker labels + themes
+[9am]  Content Strategist → 5–8 content angles per asset
+          ↕ HUMAN GATE: review Content Ideas in Coda
+[2pm]  Content Writer    → all 6 platform scripts per approved idea
+[Thu]  Newsletter Editor → weekly digest from that week's packages
+          ↕ HUMAN GATE: review Newsletter Draft in Coda
+[3×]   Publisher         → Postiz (social) + Kit (newsletter)
+[Mon]  Analyst           → analytics pull → Knowledge Base update
+[3am]  Testing Agent     → health checks → email report on failure
 ```
 
-## Output Channels
-- Instagram, YouTube, LinkedIn, TikTok, Facebook/Community
-- Weekly email newsletter (Friday digest)
+## Repos
 
-## The 7 Agents
+| Repo | Purpose |
+|---|---|
+| **This repo** | The system itself |
+| [`the8genc/ai-8gent-skills`](https://github.com/the8genc/ai-8gent-skills) | Skills library — patterns used to build this |
 
-| # | Agent | Trigger | Key Tool |
-|---|---|---|---|
-| 1 | Ingester | Daily cron | Google Drive / Dropbox scan |
-| 2 | Transcriber | New asset in Coda | Fireflies API |
-| 3 | Content Strategist | Asset processed | Claude + Coda KB |
-| 4 | Content Writer | Idea approved in Coda | Claude + platform specs |
-| 5 | Newsletter Editor | Thursday cron | Claude + Coda packages |
-| 6 | Publisher | Scheduled / approved | Postiz MCP + Kit MCP |
-| 7 | Analyst | Monday cron | Platform APIs + Coda |
+## Coda Document
+
+https://coda.io/d/_dktMUNdlobR
+
+Contains all pipeline state, approval queues, analytics, dev history, and test results.
+
+## Setup
+
+See [`docs/setup.md`](docs/setup.md) for installation, credential setup, and how to run each agent.
+
+## Running Agents
+
+```bash
+npm run scout         # Research Scout
+npm run ingester      # Scan Drive for new files
+npm run transcriber   # Transcribe pending assets
+npm run strategist    # Generate content angles
+npm run writer        # Write platform scripts for approved ideas
+npm run newsletter    # Assemble weekly digest (Thursday)
+npm run publisher     # Publish scheduled content + send newsletter
+npm run analyst       # Pull analytics, update Knowledge Base
+npm run test          # Run full test suite (no credentials needed)
+npm run pipeline      # Run all agents in sequence (interactive)
+```
+
+## Test Status
+
+```bash
+npm test    # 7/7 suites passing | 94 assertions | 100/100 health score | ~9.5s
+```
+
+All tests run against mock clients — no live credentials required.
 
 ## Tech Stack
 
 | Layer | Tool |
 |---|---|
-| Agent runtime | Claude Code (Cowork) |
-| Data hub & approvals | Coda |
-| Transcription (calls/meetings) | Fireflies MCP |
-| Transcription (video files) | Fireflies uploadAudio API |
-| Editor transcription (DaVinci) | AutoSubs fork → Coda write-back |
-| Resolve automation | davinci-resolve-mcp |
-| Social publishing | Postiz MCP |
-| Newsletter email | Kit MCP |
-| Scheduling | Cron (Claude Code) |
-| Voice knowledge | Coda Brand Voice KB table |
+| Runtime | TypeScript / Node.js (ES2022) |
+| Data / Approvals | Coda |
+| Transcription | Fireflies API |
+| Social publishing | Postiz |
+| Newsletter | Kit |
+| Web intelligence | Perplexity Sonar |
+| Social scraping | Apify |
+| CI/CD | GitHub Actions |
+| Secrets | GitHub Secrets (CI) / `.env` (local) |
 
-## Repository Structure
+## Current Status
 
-```
-cre8te-studio-content-os/
-├── CLAUDE.md                  # Manager briefing — read at every session start
-├── README.md
-├── agents/
-│   ├── 01-ingester/
-│   │   ├── agent.md           # Job description, boundaries, tools
-│   │   └── ingester.py        # Implementation
-│   ├── 02-transcriber/
-│   │   ├── agent.md
-│   │   └── transcriber.py
-│   ├── 03-content-strategist/
-│   │   ├── agent.md
-│   │   └── strategist.py
-│   ├── 04-content-writer/
-│   │   ├── agent.md
-│   │   └── writer.py
-│   ├── 05-newsletter-editor/
-│   │   ├── agent.md
-│   │   └── newsletter.py
-│   ├── 06-publisher/
-│   │   ├── agent.md
-│   │   └── publisher.py
-│   └── 07-analyst/
-│       ├── agent.md
-│       └── analyst.py
-├── skills/
-│   ├── ingester-skill.md
-│   ├── transcriber-skill.md
-│   ├── content-strategist-skill.md
-│   ├── content-writer-skill.md
-│   ├── newsletter-editor-skill.md
-│   ├── publisher-skill.md
-│   ├── analyst-skill.md
-│   └── full-pipeline-skill.md
-├── config/
-│   ├── platform-specs.json    # Character limits, hashtag rules per platform
-│   ├── coda-schema.json       # Table IDs and column IDs for Coda API calls
-│   └── cron-schedule.json     # Cron triggers for each agent
-└── docs/
-    ├── architecture.md        # Full system architecture
-    ├── setup.md               # How to install and configure
-    └── davinci-integration.md # DaVinci Resolve + AutoSubs setup guide
-```
+**Phase 3 — Publishing** (built and tested, awaiting credentials)
 
-## Quick Start
+All 9 agents are implemented and tested. The system runs fully in mock mode.
+Provisioning API credentials is the only remaining step to go live.
 
-1. Clone this repo
-2. Copy `.env.example` to `.env` and fill in credentials
-3. Run `python agents/01-ingester/ingester.py --test` to verify connections
-4. Open the Coda doc and check Source Assets table for test entry
-
-## Forked Repositories Required
-
-| Repo | Purpose | Fork Action Needed |
-|---|---|---|
-| [tmoroney/auto-subs](https://github.com/tmoroney/auto-subs) | DaVinci Resolve transcription | Add Coda write-back hook |
-| [samuelgursky/davinci-resolve-mcp](https://github.com/samuelgursky/davinci-resolve-mcp) | Claude ↔ Resolve bridge | Configure for Cre8te environment |
-| [hiteshK03/davinci-resolve-mcp](https://github.com/hiteshK03/davinci-resolve-mcp) | Free Resolve fallback | Use if no Studio license |
-| [octimot/StoryToolkitAI](https://github.com/octimot/StoryToolkitAI) | Semantic archive search (Phase 4) | Configure Coda export |
-
-## Coda Document
-[Cre8te Studio OS](https://coda.io/d/_dktMUNdlobR/Cre8te-Studio-OS_suxOrHbJ)
-
----
-*Built for Cre8te Studio — community-first content, powered by AI*
+See [`context/PENDING.md`](context/PENDING.md) for the credentials checklist.
