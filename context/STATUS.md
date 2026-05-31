@@ -107,6 +107,22 @@ See `context/PENDING.md` for the complete credentials checklist.
 
 ---
 
+## Content Intelligence (last updated 2026-05-31)
+
+The content generation logic incorporates Brandon Smithwrick's LinkedIn Content Playbook (April 2026, 56K followers, 250K impressions/week):
+
+- **3-bucket system**: Growth (40%) / Authority (40%) / Conversion (20%) — Agent 03 assigns every angle
+- **Hook patterns**: 8 named patterns, 8-12 word rule, open-loop/ellipsis convention
+- **Framework routing**: AIDA (Conversion) / PAS (Authority) / StoryArc (Growth) — Agent 04 applies per post
+- **Save-first priority**: Authority posts always end with save CTA — saves outperform likes algorithmically
+- **Keyword reply CTAs**: Conversion posts use "Comment [WORD]" format for DM pipeline
+- **Newsletter subject lines**: 4 pattern types (Contrarian, Specific metric, Curiosity gap, Community signal)
+- **KPI priority order**: Saves > Comments > Engagement rate > Impressions
+
+Source: `LinkedIn_Content_Playbook.docx` by Brandon Smithwrick (contenttocommas.co)
+
+---
+
 ## Technology Decisions (settled — don't re-litigate)
 
 | Decision | Choice | Why |
