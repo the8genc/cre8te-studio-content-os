@@ -8,6 +8,8 @@ name: Daily Content Pipeline
 
 on:
   schedule:
+    - cron: '0 3 * * *'   # 3am UTC — Testing Agent daily health check
+    - cron: '0 4 * * 0'   # Sun 4am UTC — Testing Agent weekly regression
     - cron: '0 5 * * *'   # 5am UTC — Research Scout
     - cron: '0 6 * * *'   # 6am UTC — Ingester
     - cron: '0 7 * * *'   # 7am UTC — Transcriber
@@ -61,6 +63,10 @@ jobs:
           POSTIZ_API_KEY:                  ${{ secrets.POSTIZ_API_KEY }}
           KIT_API_KEY:                     ${{ secrets.KIT_API_KEY }}
           INPUT_AGENT:                     ${{ github.event.inputs.agent || 'pipeline' }}
+          REPORT_EMAIL:                    ${{ secrets.REPORT_EMAIL }}
+          AGENT_EMAIL:                     ${{ secrets.AGENT_EMAIL }}
+          SENDGRID_API_KEY:                ${{ secrets.SENDGRID_API_KEY }}
+          CODA_TEST_RESULTS_TABLE_ID:      grid-hyU-mpiIb8
           INPUT_MODE:                      ${{ github.event.inputs.mode || 'daily' }}
         run: |
           CURRENT_HOUR=$(date -u +%H)
@@ -68,6 +74,12 @@ jobs:
 
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             npm run $INPUT_AGENT ${INPUT_MODE:+-- --$INPUT_MODE}
+          elif [ "$CURRENT_HOUR" = "03" ] && [ "$CURRENT_DOW" = "7" ]; then
+            npm run test:agent:weekly
+          elif [ "$CURRENT_HOUR" = "03" ]; then
+            npm run test:agent
+          elif [ "$CURRENT_HOUR" = "04" ] && [ "$CURRENT_DOW" = "7" ]; then
+            npm run test:agent:weekly
           elif [ "$CURRENT_HOUR" = "05" ] && [ "$CURRENT_DOW" != "7" ]; then
             npm run scout
           elif [ "$CURRENT_HOUR" = "06" ] && [ "$CURRENT_DOW" = "7" ]; then

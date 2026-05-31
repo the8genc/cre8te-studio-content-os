@@ -97,6 +97,20 @@
         "date_scouted": "c-ri-date-scouted",
         "used_by": "c-ri-used-by"
       }
+    },
+    "test_results": {
+      "table_id": "grid-hyU-mpiIb8",
+      "columns": {
+        "run_id": "c-QdqsmiyE2n",
+        "date": "c-26qtYs8lWZ",
+        "mode": "c-ZW6JjuiElI",
+        "health_score": "c-B_cYnPX_2F",
+        "passed": "c-Y8GW-jFnHS",
+        "failed": "c-NEufNLPXHB",
+        "duration_s": "c-2xfR1gGaW4",
+        "summary": "c-ESTsKCJKiN",
+        "status": "c--AvkEypwp8"
+      }
     }
   }
 }

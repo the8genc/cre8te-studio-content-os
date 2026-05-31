@@ -46,6 +46,18 @@
       "description": "Sunday 6am \u2014 deep scan, broader keyword sweep, weekly intelligence summary",
       "script": "agents/08-research-scout/scout.py",
       "mode": "deep"
+    },
+    "testing_agent_daily": {
+      "schedule": "0 3 * * *",
+      "description": "Daily 3am \u2014 health checks on all agents, email on failure",
+      "script": "agents/09-testing-agent/testing-agent.ts",
+      "mode": "daily"
+    },
+    "testing_agent_weekly": {
+      "schedule": "0 4 * * 0",
+      "description": "Sunday 4am \u2014 full regression suite, always sends weekly report email",
+      "script": "agents/09-testing-agent/testing-agent.ts",
+      "mode": "weekly"
     }
   }
 }

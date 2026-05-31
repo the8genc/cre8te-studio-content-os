@@ -5,7 +5,7 @@
  */
 
 export async function claudeComplete(
-  _system: string,
+  system: string,
   user:    string,
   _maxTokens = 2000
 ): Promise<string> {
@@ -13,20 +13,35 @@ export async function claudeComplete(
   await new Promise(r => setTimeout(r, 200)); // simulate latency
 
   // Route to appropriate fixture based on prompt content
-  if (user.includes('Extract') && user.includes('content angles')) {
-    return JSON.stringify(FIXTURE_ANGLES);
-  }
-  if (user.includes('content package') || user.includes('instagram_script')) {
+  // ORDER MATTERS: more specific checks first
+
+  // 1. Content package — system says "content writer" OR user has ANGLE: section
+  if (system.toLowerCase().includes('content writer') ||
+      user.includes('ANGLE:\n') ||
+      user.includes('instagram_script')) {
     return JSON.stringify(FIXTURE_PACKAGE);
   }
-  if (user.toLowerCase().includes('newsletter') || user.toLowerCase().includes('digest') || user.includes('Write newsletter')) {
+
+  // 2. Content angles — extract/strategist prompts
+  if (user.includes('Extract') ||
+      user.includes('content angles') ||
+      (user.includes('angle') && user.includes('TRANSCRIPT'))) {
+    return JSON.stringify(FIXTURE_ANGLES);
+  }
+
+  // 3. Newsletter assembly
+  if (user.toLowerCase().includes('newsletter') ||
+      user.toLowerCase().includes('digest') ||
+      user.includes('Write newsletter')) {
     return JSON.stringify(FIXTURE_NEWSLETTER);
   }
-  if (user.includes('Score') || user.includes('relevance')) {
+
+  // 4. Research scoring
+  if (user.includes('Score') || user.includes('relevance') || user.includes('ITEMS')) {
     return JSON.stringify(FIXTURE_SCORES);
   }
 
-  return JSON.stringify({ result: 'mock response', prompt_preview: user.slice(0, 100) });
+    return JSON.stringify({ result: 'mock response', prompt_preview: user.slice(0, 100) });
 }
 
 export function parseJsonResponse<T>(raw: string): T {

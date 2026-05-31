@@ -18,11 +18,20 @@
     "pipeline": "tsx agents/full-pipeline.ts",
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "test": "tsx tests/run-phase2.ts",
+    "test": "tsx agents/09-testing-agent/testing-agent.ts",
     "test:scout": "tsx tests/agents/test-scout.ts",
     "test:strategist": "tsx tests/agents/test-strategist.ts",
     "test:writer": "tsx tests/agents/test-writer.ts",
-    "test:newsletter": "tsx tests/agents/test-newsletter.ts"
+    "test:newsletter": "tsx tests/agents/test-newsletter.ts",
+    "test:agent": "tsx agents/09-testing-agent/testing-agent.ts",
+    "test:agent:weekly": "tsx agents/09-testing-agent/testing-agent.ts --weekly",
+    "test:agent:deploy": "tsx agents/09-testing-agent/testing-agent.ts --post-deploy",
+    "test:approval-loop": "tsx tests/integration/test-approval-loop.ts",
+    "test:publisher": "tsx tests/phase3/test-publisher.ts",
+    "test:full-pipeline": "tsx tests/integration/test-full-pipeline.ts",
+    "test:phase2": "tsx tests/run-phase2.ts",
+    "test:phase3": "npx tsx tests/phase3/test-publisher.ts",
+    "test:integration": "npx tsx tests/integration/test-approval-loop.ts && npx tsx tests/integration/test-full-pipeline.ts"
   },
   "dependencies": {
     "dotenv": "^16.0.0",
