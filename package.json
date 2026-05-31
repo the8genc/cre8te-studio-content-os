@@ -17,15 +17,20 @@
     "scout": "tsx agents/08-research-scout/scout.ts",
     "pipeline": "tsx agents/full-pipeline.ts",
     "build": "tsc",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "tsx tests/run-phase2.ts",
+    "test:scout": "tsx tests/agents/test-scout.ts",
+    "test:strategist": "tsx tests/agents/test-strategist.ts",
+    "test:writer": "tsx tests/agents/test-writer.ts",
+    "test:newsletter": "tsx tests/agents/test-newsletter.ts"
   },
   "dependencies": {
     "dotenv": "^16.0.0",
     "googleapis": "^140.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
-    "tsx": "^4.0.0",
-    "typescript": "^5.0.0"
+    "@types/node": "^20.19.41",
+    "tsx": "^4.22.3",
+    "typescript": "^5.9.3"
   }
 }
