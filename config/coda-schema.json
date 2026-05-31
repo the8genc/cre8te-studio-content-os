@@ -1,0 +1,82 @@
+{
+  "doc_id": "ktMUNdlobR",
+  "base_url": "https://coda.io/apis/v1",
+  "tables": {
+    "source_assets": {
+      "table_id": "grid-_OYt6Tiix6",
+      "columns": {
+        "asset_name": "c-exr99MOr1E",
+        "source_type": "c-xnbJyz02A3",
+        "speaker_guest": "c-F81yd6um8G",
+        "raw_file_url": "c-1o4YGF8Ov4",
+        "date_captured": "c-SoghuKkr2r",
+        "transcription_status": "c-BRN4p-Xq0A",
+        "transcript": "c-FFKyvivHkc",
+        "key_themes": "c-RdZqJeJu_D",
+        "processed": "c-6hFNqbKizF"
+      }
+    },
+    "content_ideas": {
+      "table_id": "grid-dL_d_C7-B_",
+      "columns": {
+        "content_angle": "c-Wr_pQlM6L6",
+        "source_asset": "c-R1libvZGYP",
+        "platform_targets": "c-GtMk_i-aaI",
+        "content_type": "c-sYkxbAJAKQ",
+        "approval_status": "c-dcjrrahkRo",
+        "approver_notes": "c-tu_CzYn-d2",
+        "approved_date": "c-8y_6CIOk82"
+      }
+    },
+    "content_packages": {
+      "table_id": "grid-Tdc2ZycQ_i",
+      "columns": {
+        "package_title": "c-ffCRcdq3pT",
+        "content_idea": "c-twJdjmRAU2",
+        "instagram_script": "c-TInW5nyACp",
+        "youtube_script": "c-BNJc8IJU-P",
+        "linkedin_post": "c-hYMJUeVBEk",
+        "tiktok_script": "c-5WMSD0wUSJ",
+        "facebook_post": "c-FFYuN4IRAJ",
+        "newsletter_blurb": "c-_RD6XvxX-6",
+        "publish_status": "c-PCnlMeVenn",
+        "publish_date": "c-XDYnysbsQK",
+        "published_links": "c-yHhMF-AqXl"
+      }
+    },
+    "newsletter_drafts": {
+      "table_id": "grid-B1Ztf-NOaP",
+      "columns": {
+        "subject_line": "c-L9erMWj_Jh",
+        "week_of": "c-x3YqtHTOlf",
+        "hero_story": "c-oShsem4Qp_",
+        "supporting_items": "c-0N9Iz02boc",
+        "full_draft": "c-DaGrbbuSSE",
+        "approval_status": "c-dgF510VS-k",
+        "send_date": "c-BD78_ZhCDo"
+      }
+    },
+    "analytics_log": {
+      "table_id": "grid-mfuhm3UCSP",
+      "columns": {
+        "log_entry": "c-K8bNlT2W_x",
+        "content_package": "c-uj4Qhbjo0N",
+        "platform": "c-_T21J3GbTe",
+        "views_reach": "c-jThK5zdEww",
+        "engagement_rate": "c-jIJAu61W4R",
+        "top_comment": "c-D9-bzmVDN4",
+        "logged_date": "c-4u11CcoNai"
+      }
+    },
+    "brand_voice_kb": {
+      "table_id": "grid-x2d3b0GQx4",
+      "columns": {
+        "entry_title": "c-k1evaVpQxr",
+        "content_type": "c-gPou71d0zK",
+        "content": "c-5VeoKd-l40",
+        "source": "c-vEurZMggXh",
+        "tags": "c-fClv8exiV5"
+      }
+    }
+  }
+}

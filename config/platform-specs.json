@@ -1,0 +1,58 @@
+{
+  "platforms": {
+    "instagram": {
+      "caption_max_chars": 2200,
+      "hashtag_limit": 30,
+      "hashtag_recommended": 5,
+      "tone": "Hook first. Community feel. Reel-friendly pacing.",
+      "formats": ["Reel", "Carousel", "Static", "Story"],
+      "hook_max_chars": 125,
+      "notes": "First 125 chars visible before more — make them count"
+    },
+    "youtube": {
+      "title_max_chars": 100,
+      "description_max_chars": 5000,
+      "hashtag_limit": 15,
+      "tone": "Depth. Let it breathe. Clear value promise upfront.",
+      "formats": ["Long-form", "Short"],
+      "shorts_max_seconds": 60
+    },
+    "linkedin": {
+      "post_max_chars": 3000,
+      "hook_max_chars": 210,
+      "hashtag_recommended": 3,
+      "tone": "Thought leadership. Specific insight. No fluff.",
+      "formats": ["Text post", "Article", "Document", "Video"],
+      "notes": "210 chars visible before see more — lead with the insight"
+    },
+    "tiktok": {
+      "caption_max_chars": 2200,
+      "hashtag_recommended": 5,
+      "tone": "Energy. Speed. Unexpected angle first.",
+      "formats": ["Short video", "Stitch", "Duet"],
+      "max_seconds": 600,
+      "notes": "Hook must land in first 2 seconds"
+    },
+    "facebook": {
+      "post_max_chars": 63206,
+      "tone": "Community voice. Conversational. Invite response.",
+      "formats": ["Post", "Reel", "Story", "Event"],
+      "notes": "End with a question to drive comments"
+    },
+    "newsletter": {
+      "subject_max_chars": 60,
+      "preview_text_max_chars": 90,
+      "tone": "Curated and warm. Make the reader feel like an insider.",
+      "send_day": "Friday",
+      "send_time": "08:00",
+      "structure": [
+        "Subject line (curiosity + community hook)",
+        "Hero story — 1 featured piece with context",
+        "This Week in Cre8te — 3-5 supporting clips/posts",
+        "Community spotlight — testimonial or ITL moment",
+        "Whats Coming — upcoming pods/events teaser",
+        "CTA — join community / attend next event / share"
+      ]
+    }
+  }
+}
