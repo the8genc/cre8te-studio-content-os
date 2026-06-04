@@ -143,3 +143,48 @@ When generating content or selecting hero stories, prioritize sources in this or
 | Newsletter approval | 📰 Newsletter Review | Newsletter Drafts → Approval Status = "Approved" | Agent 06 (Publisher, newsletter) |
 
 **Rule**: No agent publishes or sends anything without the corresponding Coda approval status being set by the human approver.
+
+
+---
+
+## Agent 10 — Blog Publisher
+**File**: `agents/10-blog-publisher/blog-publisher.ts`
+**Job**: Publish approved blog post drafts to Framer CMS, deploy to production, write live URLs back to Coda so Newsletter Editor can replace [LINK] placeholders with real blog URLs.
+**Trigger**: Daily 1pm | Condition: Blog Posts table Status = "Ready to Publish"
+**External**: Framer Server API (`framer-api` npm, WebSocket-based)
+**Paywall**: `is_paywalled=true` gates full body; teaser shown to free visitors. Newsletter always links regardless.
+**New env**: `FRAMER_API_KEY`, `FRAMER_PROJECT_URL`, `FRAMER_BLOG_COLLECTION_ID`
+
+## Agent 11 — Editorial Agent
+**File**: `agents/11-editorial-agent/editorial.ts`
+**Job**: Ingest podcast transcript → 7 editorial outputs that cut weekly prep from ~6 hours to ~1.5 hours of editing.
+**Trigger**: Daily 10am auto (Mini Pods only) | Manual: `npm run editorial -- --asset-id=<id>`
+**Outputs → Coda**: Editorial Packages table (`grid-EAyQNcryhX`)
+  1. In-Voice Open (150-200 words, Cre8te voice)
+  2. Pull Quote 1 + 2 (verbatim, speaker, estimated timestamp, framing line)
+  3. "From the Conversation" (300-400 word editorial narrative)
+  4. 3 Social Clip Moments (title, timestamps, why it works, post copy)
+  5. Spill Thread (3-5 posts ≤280 chars, curiosity-building — no spoilers)
+  6. Substack-Native Cut (400-600 words, standalone piece)
+**Note**: All outputs are drafts for editor review. Timestamp estimates need verification.
+
+## Agent 12 — Sponsor Performance Agent
+**File**: `agents/12-sponsor-agent/sponsor.ts`
+**Job**: Pull UTM/click/attribution data, write partner performance reports. Weekly internal digest + monthly partner-facing report.
+**Triggers**: Sunday 7am (weekly) | 1st of month 8am (monthly) | Manual: `npm run sponsor -- --mode=weekly`
+**Outputs → Coda**: Sponsor Reports table (`grid-ULAXcWJZRS`)
+**Data sources**: UTM clicks, podcast downloads, Kit newsletter clicks, member acquisition (stubs ready to wire with OAuth)
+**Note**: Monthly reports are status "Needs Human Review" before delivery to partners.
+
+## Agent 13 — Guest Research Agent
+**File**: `agents/13-guest-research-agent/guest-research.ts`
+**Job**: Given a guest name, produce a complete pre-show research brief. Saves ~90 min/episode.
+**Trigger**: On-demand ONLY: `npm run guest-research -- --guest="Name" [--url=...] [--topic=...]`
+**Outputs → Coda**: Guest Briefs table (`grid-OJx4KZP3Qu`)
+  1. Trajectory (~200 words, the interesting arc not the bio)
+  2. Recent Work (bullet list, flags "→ WHY THIS MATTERS")
+  3. 3 Fresh Questions (not asked in last 6 months, with why_fresh + what_it_unlocks)
+  4. Conflict Checks (surface-level web research, explicit about uncertainty)
+  5. Promo Tags (handles, hashtags, ready-to-use promo copy)
+  6. Quick Bio (2 sentences, host reads verbatim to open episode)
+**Data**: 3 Perplexity searches (trajectory, recent podcasts, recent announcements)

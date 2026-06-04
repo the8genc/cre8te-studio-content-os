@@ -2,7 +2,7 @@
 
 **Last updated**: 2026-05-31
 **Current phase**: Phase 3 — Publishing (built, blocked on credentials)
-**Test health**: 100/100 — 7/7 suites passing, 94 assertions, ~9.5s runtime
+**Test health**: 100/100 — 8/8 suites passing, 113 assertions, ~8.3s runtime
 **Commit history**: 9 commits on `main`
 
 ---
@@ -34,6 +34,10 @@
 | 07 Analyst | `agents/07-analyst/analyst.ts` | ✅ Tested (mock) | 🔑 Needs platform analytics OAuth |
 | 08 Research Scout | `agents/08-research-scout/scout.ts` | ✅ Tested (mock) | 🔑 Needs Apify + Perplexity API keys |
 | 09 Testing Agent | `agents/09-testing-agent/testing-agent.ts` | ✅ Tested | 🔑 Needs REPORT_EMAIL + email credentials |
+| 10 Blog Publisher | `agents/10-blog-publisher/blog-publisher.ts` | ✅ Built | 🔑 Needs FRAMER_API_KEY + FRAMER_PROJECT_URL |
+| 11 Editorial Agent | `agents/11-editorial-agent/editorial.ts` | ✅ Tested | 🔑 Needs Anthropic API key |
+| 12 Sponsor Agent | `agents/12-sponsor-agent/sponsor.ts` | ✅ Built | 🔑 Needs analytics OAuth + Sponsor Deals data |
+| 13 Guest Research Agent | `agents/13-guest-research-agent/guest-research.ts` | ✅ Tested | 🔑 Needs Perplexity API key |
 
 ### Shared Library
 | File | Purpose | Status |
