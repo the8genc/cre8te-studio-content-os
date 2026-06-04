@@ -123,38 +123,69 @@ NEWSLETTER SAVE-WORTHINESS:
 - Authority content = frameworks, systems, checklists — write them to be save-worthy
 - Label save-worthy sections clearly so readers know to bookmark them`;
 
-  const user = `Write a complete weekly newsletter digest for Cre8te Studio.
+  const user = `Write a complete Cre8te Sumthin weekly newsletter issue.
 
-HERO STORY (featured content):
+EPISODE / FEATURED CONTENT (From the Conversation source):
 ${heroBlurb}
 
-SUPPORTING ITEMS (3-5 items):
+SUPPORTING CONTENT THIS WEEK:
 ${supportItems}
 
-WHAT'S HAPPENING IN THE CREATOR ECONOMY (from our research this week):
+CREATOR ECONOMY INTELLIGENCE (for Make-Monetize-Multiply):
 ${researchStories}
 
-Write the newsletter in this EXACT structure:
-1. Subject line (≤60 chars — choose the strongest from these options and write ONE:
-   a. Contrarian: challenge something creators believe
-   b. Specific metric: "[name] hit [number] with [surprising method]"
-   c. Curiosity gap: makes reader feel they'll miss something important
-   d. Community signal: "what we captured this week" / "our community is talking about")
-2. Preview text (completes the subject's thought, ≤90 chars)
-3. Hero section (2-3 sentences context + the insight + link placeholder [HERO_LINK])
-4. "This Week in Cre8te" (3-5 blurbs — mark the most save-worthy one with 📌)
-5. "What's Happening in the Creator Economy" (2-3 sentences from research — include 1 actionable takeaway)
-6. Community Spotlight (testimonial-style moment from the community)
-7. "What's Coming" (1-2 sentences teasing next week)
-8. CTA — single clear action aligned to one of these:
-   - Grow the owned audience: "Subscribe / share this with one creator you know"
-   - Drive event attendance: "Register for [upcoming session]"
-   - Drive saves: "Bookmark this edition — section 4 is worth keeping"
+Write the newsletter in these SIX EXACT SECTIONS in this order:
 
-Format as plain text with clear section headers. Return as JSON:
+1. SUBJECT LINE (≤60 chars — one of: Contrarian / Specific metric / Curiosity gap / Community signal)
+
+2. PREVIEW TEXT (≤90 chars, completes the subject's thought)
+
+3. THE OPEN
+   2-3 paragraphs in the founder's voice. Frank, specific, no "this week we have..." preamble.
+   The opening must earn the rest of the read. Reference something real from the week —
+   a conversation, an observation, something that happened — not a content summary.
+   This is the most personal section. It sounds like a person, not a publication.
+
+4. ONE THING WORTH YOUR TIME
+   A single curated pick. One, not a list. Could be an article, tool, event, essay, or
+   creator to follow. State the pick, then 1-2 sentences on why it's worth the reader's
+   attention right now. Opinionated. If you wouldn't actually recommend it, don't write it.
+
+5. FROM THE CONVERSATION
+   A clip, quote, or moment pulled from the featured episode content.
+   Sets up the link to the full episode. 3-5 sentences max.
+   Include the [HERO_LINK] placeholder where the episode link goes.
+   This is the content flywheel — every issue should make the reader want to listen.
+
+6. MAKE-MONETIZE-MULTIPLY
+   Practical creator economy intelligence from the research this week.
+   Structure: Make (what to build or create), Monetize (how to earn from it),
+   Multiply (how to scale or distribute it). 3 punchy paragraphs, one per beat.
+   Grounded in the actual research stories provided. Actionable, not aspirational.
+   This is the save-worthy section — write it so readers bookmark it.
+
+7. WORKING CREATOR
+   Short profile or Q&A moment from someone in the Cre8te network.
+   Draw from the supporting content or community testimonials.
+   2-3 sentences intro + 1 direct quote or specific detail.
+   Deepens relationships; carries the cultural positioning.
+   If no specific person is available, write a placeholder: [WORKING CREATOR — insert this week's profile].
+
+8. PARTNER SPOTLIGHT
+   One partner, written in-voice, clearly labeled "Cre8te Partner."
+   Editorial not promotional. Specific about why this partner matters to creators.
+   If no active partner this week, write a placeholder: [PARTNER SPOTLIGHT — insert this week's partner].
+
+9. THE CLOSE
+   A question or reply hook. We want people writing back.
+   1-2 sentences max. Direct, warm, specific to this issue.
+   End with something like "Hit reply and tell me..." or "What would you add?"
+
+Format as plain text with clear section headers labeled exactly as above.
+Return as JSON:
 {
   "subject_line": "...",
-  "full_draft": "complete newsletter text with all sections"
+  "full_draft": "complete newsletter text with all 9 elements above"
 }`;
 
   const raw  = await claudeComplete(system, user, 3000);

@@ -181,53 +181,61 @@ Which of those three questions is hardest for you to answer right now? Drop it i
 };
 
 const FIXTURE_NEWSLETTER = {
-  subject_line: 'The 47-follower $80K lesson from our Summit',
-  full_draft: `SUBJECT: The 47-follower $80K lesson from our Summit
-PREVIEW: What Maya Chen's story means for every creator in this community
+  subject_line: 'She had 47 followers and landed $80K',
+  full_draft: `SUBJECT: She had 47 followers and landed $80K
+PREVIEW: The Clarity Before Reach framework that built a 7-figure agency
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-THIS WEEK'S HERO STORY
+THE OPEN
 
-Maya Chen walked into the Cre8te Summit and stopped the room.
+Something happened at the Summit that I keep thinking about. Maya Chen stood at the front of the room and said she had 47 followers when she landed an $80,000 contract. Nobody moved.
 
-47 LinkedIn followers. $80,000 contract. Zero paid ads.
+The client picked her because she understood their problem better than anyone who pitched. Not because she had reach. Because she had clarity.
 
-The client told her they chose her because she understood their problem better than anyone who pitched them. Not reach. Clarity.
-
-Maya shared her Clarity Before Reach framework with us — three questions that any creator can answer today to cut through the noise and start converting. We captured the full session. [HERO_LINK]
+I've been building long enough to know that's not luck. That's a system. And this week we broke it down.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-THIS WEEK IN CRE8TE
+ONE THING WORTH YOUR TIME
 
-→ The 3-question framework that replaces your content strategy [LINK_1]
-→ 800 followers, booked 3 months out — what community-first actually looks like [LINK_2]  
-→ "Slow is not stuck" — Maya's closing words that hit different [LINK_3]
+"The $80K Post" by Maya Chen on Substack. She published the full story behind the contract — the pitch, the positioning, the exact language she used. Read it before you write your next piece of content. It'll change how you think about who you're writing for.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-WHAT'S HAPPENING IN THE CREATOR ECONOMY
+FROM THE CONVERSATION
 
-Instagram expanded monetization access to mid-tier creators this week — subscription tools and bonus programs now available to accounts with 10K-100K followers. If you've been building steadily, this is worth checking.
+Maya walked us through her Clarity Before Reach framework — three questions she runs every piece of content through before she publishes. The one that stopped me: "Why are you the only person who can say this, right now, in this way?"
 
-A new AI tool is cutting post-production time by 70% for creators repurposing long-form content into short-form clips. We're testing it — report coming in next week's issue.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-COMMUNITY SPOTLIGHT
-
-"I applied Maya's three questions to my LinkedIn profile this week. Rewrote my headline in 20 minutes. Got two inbound messages the next day. This framework is real." — Cre8te Community member
+If you can't answer that, more reach just means more noise. The full conversation is worth your time. [HERO_LINK]
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-WHAT'S COMING
+MAKE-MONETIZE-MULTIPLY
 
-Next week we're going deep on the business model conversation from the Summit — three creators who built six-figure businesses from communities under 1,000 people. Don't miss it.
+**Make:** Build one piece of content this week around a problem your ideal client loses sleep over — not a problem you find interesting. The distinction is everything.
+
+**Monetize:** Maya's $80K contract came from a post with 11 likes. The conversion wasn't the algorithm; it was specificity. Price your offers for the person who's losing sleep, not the person who's casually curious.
+
+**Multiply:** The Clarity Before Reach framework scales across every platform without changing the core message. One clear answer to those three questions, distributed everywhere. That's the system.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Ready to build your Clarity Before Reach foundation? Join the Cre8te community and get access to the full Summit recording library. → [JOIN_LINK]`,
+WORKING CREATOR
+
+Maya Chen built Content to Commerce to seven figures from 47 LinkedIn followers. No paid ads, no viral moment. Just specificity applied consistently over time. "Slow is not the same as stuck," she said at the end of our session. For every creator in a frustrating middle phase, that one lands differently.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PARTNER SPOTLIGHT
+
+[PARTNER SPOTLIGHT — insert this week's partner]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+THE CLOSE
+
+What's the problem your ideal client is losing sleep over right now? Hit reply and tell me — I read every response, and the answers are usually worth a future issue.`,
 };
 
 const FIXTURE_SCORES = [
