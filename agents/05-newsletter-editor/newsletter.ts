@@ -44,6 +44,63 @@ async function getThisWeeksPackages() {
 }
 
 /**
+ * Pull creator economy stories: platform advancements, creator startups, ecosystem trends.
+ * Feeds the Make-Monetize-Multiply section.
+ */
+async function getCreatorEconomyStories(): Promise<string> {
+  try {
+    const RI = schema.tables.research_intelligence;
+    const rows = await getRows(RI.table_id, undefined, 100);
+    const stories = rows
+      .filter(r => {
+        const tags  = String(r.values[RI.columns.use_case_tags]?.value ?? '');
+        const score = Number(r.values[RI.columns.final_score]?.value  ?? 0);
+        // Creator economy: platform updates, AI tools, industry news, ecosystem
+        return (
+          tags.includes('Newsletter Story') ||
+          tags.includes('Platform Update')  ||
+          tags.includes('AI Tool')          ||
+          tags.includes('Industry News')
+        ) && score >= 7.5;
+      })
+      .slice(0, 4)
+      .map(r => `- ${r.values[RI.columns.item_title]?.value}: ${r.values[RI.columns.summary]?.value}`)
+      .join('\n');
+    return stories || 'No creator economy stories found this week.';
+  } catch {
+    return '';
+  }
+}
+
+/**
+ * Pull creative economy stories: music, film, fashion.
+ * Feeds the "In the Creative Economy" section.
+ */
+async function getCreativeEconomyStories(): Promise<string> {
+  try {
+    const RI = schema.tables.research_intelligence;
+    const rows = await getRows(RI.table_id, undefined, 100);
+    const stories = rows
+      .filter(r => {
+        const tags    = String(r.values[RI.columns.use_case_tags]?.value ?? '');
+        const title   = String(r.values[RI.columns.item_title]?.value    ?? '').toLowerCase();
+        const summary = String(r.values[RI.columns.summary]?.value       ?? '').toLowerCase();
+        const score   = Number(r.values[RI.columns.final_score]?.value   ?? 0);
+        const creativeKeywords = ['music', 'film', 'fashion', 'movie', 'album', 'label',
+          'streaming', 'box office', 'designer', 'collection', 'release', 'record'];
+        const isCreative = creativeKeywords.some(k => title.includes(k) || summary.includes(k));
+        return isCreative && score >= 7.0;
+      })
+      .slice(0, 3)
+      .map(r => `- ${r.values[RI.columns.item_title]?.value}: ${r.values[RI.columns.summary]?.value}`)
+      .join('\n');
+    return stories || 'No creative economy stories found this week.';
+  } catch {
+    return '';
+  }
+}
+
+/**
  * Resolve the live blog URL for a content package, if one has been published.
  * Used to replace [HERO_LINK] and [LINK_N] placeholders with real URLs.
  */
@@ -61,30 +118,14 @@ async function getBlogUrlForPackage(pkgId: string): Promise<string | null> {
   }
 }
 
-async function getResearchStories(): Promise<string> {
-  try {
-    const rows = await getRows(RI.table_id, undefined, 50);
-    const stories = rows
-      .filter(r => {
-        const tags  = String(r.values[RI.columns.use_case_tags]?.value ?? '');
-        const score = Number(r.values[RI.columns.final_score]?.value ?? 0);
-        return tags.includes('Newsletter Story') && score >= 7.5;
-      })
-      .slice(0, 3)
-      .map(r => `- ${r.values[RI.columns.item_title]?.value}: ${r.values[RI.columns.summary]?.value}`)
-      .join('\n');
-    return stories || 'No external stories found this week.';
-  } catch {
-    return '';
-  }
-}
+
 
 async function checkDraftExists(weekOf: string): Promise<boolean> {
   const drafts = await getRows(ND.table_id, undefined, 20);
   return drafts.some(d => String(d.values[ND.columns.week_of]?.value ?? '') === weekOf);
 }
 
-async function generateNewsletter(packages: Awaited<ReturnType<typeof getThisWeeksPackages>>, researchStories: string, blogUrlMap?: Map<string, string>): Promise<{ subject: string; draft: string; heroId: string; supportingIds: string[] }> {
+async function generateNewsletter(packages: Awaited<ReturnType<typeof getThisWeeksPackages>>, creatorEconomyStories: string, creativeEconomyStories: string, blogUrlMap?: Map<string, string>): Promise<{ subject: string; draft: string; heroId: string; supportingIds: string[] }> {
   // Score packages — Summit > Mini Pod > Testimonial > ITL
   const sourceScore: Record<string, number> = {
     'Summit Recording': 4,
@@ -131,10 +172,13 @@ ${heroBlurb}
 SUPPORTING CONTENT THIS WEEK:
 ${supportItems}
 
-CREATOR ECONOMY INTELLIGENCE (for Make-Monetize-Multiply):
-${researchStories}
+CREATOR ECONOMY INTELLIGENCE (for Make-Monetize-Multiply — platform advancements, creator startups, ecosystem trends):
+${creatorEconomyStories}
 
-Write the newsletter in these SIX EXACT SECTIONS in this order:
+CREATIVE ECONOMY INTELLIGENCE (for In the Creative Economy — music, film, fashion):
+${creativeEconomyStories}
+
+Write the newsletter in these EIGHT EXACT SECTIONS in this order:
 
 1. SUBJECT LINE (≤60 chars — one of: Contrarian / Specific metric / Curiosity gap / Community signal)
 
@@ -161,22 +205,33 @@ Write the newsletter in these SIX EXACT SECTIONS in this order:
    Practical creator economy intelligence from the research this week.
    Structure: Make (what to build or create), Monetize (how to earn from it),
    Multiply (how to scale or distribute it). 3 punchy paragraphs, one per beat.
-   Grounded in the actual research stories provided. Actionable, not aspirational.
+   Grounded in creator economy research: platform advancements, startups helping creators
+   earn more, ecosystem trends. Actionable, not aspirational.
    This is the save-worthy section — write it so readers bookmark it.
 
-7. WORKING CREATOR
+7. IN THE CREATIVE ECONOMY
+   Intelligence from the creative economy this week — music, film, and fashion.
+   NOT the same as the creator economy. This is about the industries where creative work
+   is made and sold: new releases, industry deals, technology shifting production,
+   business model changes in music/film/fashion, cultural moments worth noting.
+   2-3 items, each 2-3 sentences. Curated, specific, no fluff.
+   Format each item with a bold lead-in: **Music:** / **Film:** / **Fashion:**
+   Use whichever 2-3 are most relevant this week based on research provided.
+   If only 1-2 verticals have strong stories, use those — do not pad.
+
+8. WORKING CREATOR
    Short profile or Q&A moment from someone in the Cre8te network.
    Draw from the supporting content or community testimonials.
    2-3 sentences intro + 1 direct quote or specific detail.
    Deepens relationships; carries the cultural positioning.
    If no specific person is available, write a placeholder: [WORKING CREATOR — insert this week's profile].
 
-8. PARTNER SPOTLIGHT
+9. PARTNER SPOTLIGHT
    One partner, written in-voice, clearly labeled "Cre8te Partner."
    Editorial not promotional. Specific about why this partner matters to creators.
    If no active partner this week, write a placeholder: [PARTNER SPOTLIGHT — insert this week's partner].
 
-9. THE CLOSE
+10. THE CLOSE
    A question or reply hook. We want people writing back.
    1-2 sentences max. Direct, warm, specific to this issue.
    End with something like "Hit reply and tell me..." or "What would you add?"
@@ -229,17 +284,18 @@ async function main(): Promise<void> {
     return;
   }
 
-  const researchStories = await getResearchStories();
-  console.log(`[Newsletter Editor] Research stories loaded`);
+  const creatorEconomyStories  = await getCreatorEconomyStories();
+  const creativeEconomyStories = await getCreativeEconomyStories();
+  console.log(`[Newsletter Editor] Research stories loaded — creator economy + creative economy`);
 
   // Resolve live blog URLs for packages before assembly
-const blogUrlMap = new Map<string, string>();
-for (const { pkg } of [...(heroRef ? [heroRef] : []), ...supporting]) {
-  const url = await getBlogUrlForPackage(pkg.id);
-  if (url) blogUrlMap.set(pkg.id, url);
-}
+  const blogUrlMap = new Map<string, string>();
+  for (const { pkg } of [...(heroRef ? [heroRef] : []), ...supporting]) {
+    const url = await getBlogUrlForPackage(pkg.id);
+    if (url) blogUrlMap.set(pkg.id, url);
+  }
 
-const { subject, draft, heroId, supportingIds } = await generateNewsletter(packages, researchStories, blogUrlMap);
+  const { subject, draft, heroId, supportingIds } = await generateNewsletter(packages, creatorEconomyStories, creativeEconomyStories, blogUrlMap);
 
   await addRows(ND.table_id, [[
     { column: ND.columns.subject_line,    value: subject },

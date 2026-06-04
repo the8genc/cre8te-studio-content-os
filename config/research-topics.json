@@ -1,29 +1,39 @@
 {
-  "_comment": "Research Scout configuration — tracked topics, keywords, and hashtags",
-
-  "perplexity_queries": [
-    "creator economy news this week funding acquisitions platform changes",
-    "Instagram algorithm update creators 2025 2026",
-    "TikTok creator monetization policy changes news",
-    "YouTube creator economy updates partner program changes",
-    "LinkedIn creator tools updates thought leadership trends",
-    "AI tools for content creators new launches 2025 2026",
-    "personal branding trends creator entrepreneurs",
-    "content creator burnout mental health community discussions",
-    "creator economy jobs roles emerging specializations",
-    "brand partnerships influencer marketing trends 2026",
-    "newsletter creator economy trends Beehiiv Substack Kit",
-    "social media platform algorithm changes creators",
-    "short form video trends Instagram Reels TikTok YouTube Shorts",
-    "creator owned businesses products digital entrepreneurs",
-    "content repurposing AI automation tools creators",
-    "community building creators Discord platforms",
-    "creator economy regulatory news taxes legal",
-    "podcasting trends indie creators growth monetization",
-    "video editing AI tools creators workflow",
-    "personal brand building strategies frameworks 2026"
-  ],
-
+  "_comment": "Research Scout configuration \u2014 tracked topics, keywords, and hashtags",
+  "perplexity_queries": {
+    "creator_economy": [
+      "creator economy news this week funding acquisitions platform changes",
+      "Instagram algorithm update creators 2025 2026",
+      "TikTok creator monetization policy changes news",
+      "YouTube creator economy updates partner program changes",
+      "LinkedIn creator tools updates thought leadership trends",
+      "AI tools for content creators new launches 2025 2026",
+      "personal branding trends creator entrepreneurs",
+      "content creator burnout mental health community discussions",
+      "creator economy jobs roles emerging specializations",
+      "brand partnerships influencer marketing trends 2026",
+      "newsletter creator economy trends Beehiiv Substack Kit",
+      "social media platform algorithm changes creators",
+      "short form video trends Instagram Reels TikTok YouTube Shorts",
+      "creator owned businesses products digital entrepreneurs",
+      "content repurposing AI automation tools creators",
+      "community building creators Discord platforms",
+      "creator economy regulatory news taxes legal",
+      "podcasting trends indie creators growth monetization",
+      "video editing AI tools creators workflow",
+      "personal brand building strategies frameworks 2026",
+      "creator economy startup funding 2026 tools helping creators earn",
+      "newsletter podcast creator monetization business models 2026"
+    ],
+    "creative_economy": [
+      "music industry news this week streaming deals label releases 2026",
+      "film industry news independent film deals box office distribution 2026",
+      "fashion industry news designer collabs streetwear drops business 2026",
+      "music technology AI production tools advancements 2026",
+      "film funding Black directors emerging filmmakers deals 2026",
+      "fashion DTC brand collab model sell-through data trends 2026"
+    ]
+  },
   "linkedin_keywords": [
     "creator economy",
     "personal branding content creator",
@@ -34,7 +44,6 @@
     "social media strategy 2026",
     "creator monetization"
   ],
-
   "instagram_hashtags": [
     "creatorseconomy",
     "personalbranding",
@@ -45,7 +54,6 @@
     "ugccreator",
     "creativebusiness"
   ],
-
   "tiktok_hashtags": [
     "creatortips",
     "contentcreatortips",
@@ -56,7 +64,6 @@
     "creatorlife",
     "ugccreator"
   ],
-
   "priority_keywords": [
     "creator economy",
     "personal brand",
@@ -67,7 +74,6 @@
     "newsletter creator",
     "AI creator tools"
   ],
-
   "workshop_signal_keywords": [
     "how do I",
     "struggling with",
@@ -78,19 +84,85 @@
     "just starting out",
     "overwhelmed by"
   ],
-
   "tracked_publications": [
     "https://www.thecreatoreconomy.com/feed",
     "https://creatoriq.com/blog/feed",
     "https://www.tubefilter.com/feed/",
     "https://influencermarketinghub.com/feed/"
   ],
-
   "content_clusters": {
-    "platform_updates": ["algorithm", "policy", "monetization", "creator fund", "partner program"],
-    "ai_tools": ["AI", "automation", "workflow", "editing tool", "content generation"],
-    "community_building": ["community", "engagement", "Discord", "cohort", "membership"],
-    "business_models": ["revenue", "sponsorship", "brand deal", "product", "course"],
-    "creative_craft": ["storytelling", "hook", "script", "video", "thumbnail", "caption"]
+    "platform_updates": [
+      "algorithm",
+      "policy",
+      "monetization",
+      "creator fund",
+      "partner program"
+    ],
+    "ai_tools": [
+      "AI",
+      "automation",
+      "workflow",
+      "editing tool",
+      "content generation"
+    ],
+    "community_building": [
+      "community",
+      "engagement",
+      "Discord",
+      "cohort",
+      "membership"
+    ],
+    "business_models": [
+      "revenue",
+      "sponsorship",
+      "brand deal",
+      "product",
+      "course"
+    ],
+    "creative_craft": [
+      "storytelling",
+      "hook",
+      "script",
+      "video",
+      "thumbnail",
+      "caption"
+    ]
+  },
+  "use_case_tag_rules": {
+    "Creative Economy": {
+      "description": "Music, film, or fashion industry news. Feeds IN THE CREATIVE ECONOMY newsletter section.",
+      "keywords": [
+        "music",
+        "film",
+        "fashion",
+        "movie",
+        "album",
+        "label",
+        "box office",
+        "designer",
+        "collection",
+        "record deal",
+        "fashion week",
+        "collab drop",
+        "streaming service",
+        "studio deal",
+        "artist"
+      ]
+    },
+    "Newsletter Story": {
+      "description": "Creator economy: platform updates, creator startups, ecosystem trends. Feeds MAKE-MONETIZE-MULTIPLY.",
+      "keywords": [
+        "platform update",
+        "creator monetization",
+        "creator startup",
+        "creator fund",
+        "algorithm change",
+        "creator tool",
+        "creator economy",
+        "ecosystem trend",
+        "newsletter growth",
+        "podcast monetization"
+      ]
+    }
   }
 }

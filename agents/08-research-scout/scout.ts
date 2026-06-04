@@ -79,18 +79,40 @@ async function perplexitySearch(query: string): Promise<{ content: string; citat
 }
 
 async function runWebResearch(queryLimit: number): Promise<RawItem[]> {
-  const queries = (researchTopics.perplexity_queries as string[]).slice(0, queryLimit);
+  // Support both old flat list and new categorised object
+  const queryConfig = researchTopics.perplexity_queries as
+    string[] | { creator_economy: string[]; creative_economy: string[] };
+
+  type QuerySet = { queries: string[]; category: 'creator_economy' | 'creative_economy' };
+  const sets: QuerySet[] = Array.isArray(queryConfig)
+    ? [{ queries: queryConfig, category: 'creator_economy' }]
+    : [
+        { queries: queryConfig.creator_economy ?? [], category: 'creator_economy'  },
+        { queries: queryConfig.creative_economy ?? [], category: 'creative_economy' },
+      ];
+
   const items: RawItem[] = [];
 
-  for (const query of queries) {
-    try {
-      const { content, citations } = await perplexitySearch(query);
-      for (const url of citations.slice(0, 2)) {
-        items.push({ title: query, url, platform: 'Web/News', source_type: 'Web', raw_excerpt: content.slice(0, 500), engagement: 0 });
+  for (const { queries, category } of sets) {
+    const limited = queries.slice(0, Math.ceil(queryLimit / sets.length));
+    for (const query of limited) {
+      try {
+        const { content, citations } = await perplexitySearch(query);
+        for (const url of citations.slice(0, 2)) {
+          items.push({
+            title:       query,
+            url,
+            platform:    'Web/News',
+            source_type: 'Web',
+            raw_excerpt: content.slice(0, 500),
+            engagement:  0,
+            _category:   category,  // carry through for tagging
+          });
+        }
+        await sleep(1000);
+      } catch (err) {
+        console.warn(`  Perplexity error [${query.slice(0, 40)}]:`, err);
       }
-      await sleep(1000);
-    } catch (err) {
-      console.warn(`  Perplexity error [${query.slice(0, 40)}]:`, err);
     }
   }
   return items;
@@ -201,7 +223,10 @@ async function scoreItems(items: RawItem[], existingUrls: Set<string>): Promise<
 - novelty: is this genuinely new information (high) or well-known background (low)?
 - actionability: does this suggest a content angle, workshop topic, newsletter story, or platform update to cover?
 
-Also assign use_case_tags from: [Content Idea, Newsletter Story, Workshop Signal, Platform Update, AI Tool, Industry News]
+Also assign use_case_tags from:
+- Content Idea, Workshop Signal, AI Tool, Industry News — general purpose
+- Newsletter Story, Platform Update — creator economy: platform changes, monetization tools, ecosystem trends
+- Creative Economy — music/film/fashion industry news (ONLY use this for items clearly about those industries)
 Write a 2-sentence summary from Cre8te Studio's community-first perspective.
 
 Return JSON array only, no other text:
