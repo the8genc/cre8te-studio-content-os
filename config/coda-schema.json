@@ -115,6 +115,62 @@
         "summary": "c-ESTsKCJKiN",
         "status": "c--AvkEypwp8"
       }
+    },
+    "editorial_packages": {
+      "table_id": "grid-EAyQNcryhX",
+      "columns": {
+        "episode_title": "c-PU3UPkoKU4",
+        "source_asset": "c-sWpo7CVKCj",
+        "in_voice_open": "c-ayUCviWd9H",
+        "pull_quote_1": "c-gYE7UCXdLa",
+        "pull_quote_2": "c-S0OfmEfa0A",
+        "from_the_conversation": "c-uw464_MMee",
+        "social_clip_moments": "c-RsgW_DY9EN",
+        "spill_thread": "c-_4O4W_kCbt",
+        "substack_cut": "c-EprSbdfwIH",
+        "status": "c-0Fzh0LQVbR",
+        "created_at": "c-n8rVOQmLHc"
+      }
+    },
+    "sponsor_deals": {
+      "table_id": "grid-thI0WD39Ke",
+      "columns": {
+        "partner_name": "c-Io6OLRM-sn",
+        "utm_prefix": "c-GuxbQqDO7O",
+        "deal_terms": "c-V2e2oShYg1",
+        "contact_email": "c-lOgKxVh9jc",
+        "status": "c-ujDEEmeo9c",
+        "attribution_window": "c-A2hTZLShzb",
+        "deal_start": "c-pg6sQ1YRfA",
+        "deal_end": "c-UgIg5rQVyE"
+      }
+    },
+    "sponsor_reports": {
+      "table_id": "grid-ULAXcWJZRS",
+      "columns": {
+        "report_title": "c-WWA0Wxq7FZ",
+        "report_type": "c-YEenuwinQ6",
+        "period_end": "c-ea3fN1QnOV",
+        "partner_name": "c-38mGfvlJq0",
+        "content": "c-kAGYVVyGDl",
+        "status": "c-FDwR4rGRvk"
+      }
+    },
+    "guest_briefs": {
+      "table_id": "grid-OJx4KZP3Qu",
+      "columns": {
+        "guest_name": "c-IIMMAHsMfq",
+        "episode_topic": "c-PQpBhjjLY_",
+        "guest_url": "c-UoWj9FjKOq",
+        "trajectory": "c-NLQpHWWiG0",
+        "recent_work": "c-KNEDuH-7KL",
+        "fresh_questions": "c--ipFW8e1ey",
+        "conflict_checks": "c-tgkuPCYtUY",
+        "promo_tags": "c-RWZQ_ZpE9P",
+        "quick_bio": "c-cuz-lT-aVo",
+        "status": "c-x8z1qqbQ-u",
+        "research_date": "c-6Huil-v_kC"
+      }
     }
   }
 }

@@ -10,6 +10,7 @@ import researchTopics from '../../config/research-topics.json' assert { type: 'j
 import schema from '../../config/coda-schema.json' assert { type: 'json' };
 
 const CP  = schema.tables.content_packages;
+const BP  = schema.tables.blog_posts;
 const ND  = schema.tables.newsletter_drafts;
 const SA  = schema.tables.source_assets;
 const CI  = schema.tables.content_ideas;
@@ -42,6 +43,24 @@ async function getThisWeeksPackages() {
   });
 }
 
+/**
+ * Resolve the live blog URL for a content package, if one has been published.
+ * Used to replace [HERO_LINK] and [LINK_N] placeholders with real URLs.
+ */
+async function getBlogUrlForPackage(pkgId: string): Promise<string | null> {
+  try {
+    const BP = schema.tables.blog_posts;
+    const blogPosts = await getRows(BP.table_id, `"${BP.columns.content_package}":"${pkgId}"`, 5);
+    const published = blogPosts.find(p =>
+      String(p.values[BP.columns.status]?.value ?? '') === 'Published' &&
+      String(p.values[BP.columns.live_url]?.value ?? '').startsWith('http')
+    );
+    return published ? String(published.values[BP.columns.live_url].value) : null;
+  } catch {
+    return null;
+  }
+}
+
 async function getResearchStories(): Promise<string> {
   try {
     const rows = await getRows(RI.table_id, undefined, 50);
@@ -65,7 +84,7 @@ async function checkDraftExists(weekOf: string): Promise<boolean> {
   return drafts.some(d => String(d.values[ND.columns.week_of]?.value ?? '') === weekOf);
 }
 
-async function generateNewsletter(packages: Awaited<ReturnType<typeof getThisWeeksPackages>>, researchStories: string): Promise<{ subject: string; draft: string; heroId: string; supportingIds: string[] }> {
+async function generateNewsletter(packages: Awaited<ReturnType<typeof getThisWeeksPackages>>, researchStories: string, blogUrlMap?: Map<string, string>): Promise<{ subject: string; draft: string; heroId: string; supportingIds: string[] }> {
   // Score packages — Summit > Mini Pod > Testimonial > ITL
   const sourceScore: Record<string, number> = {
     'Summit Recording': 4,
@@ -141,10 +160,21 @@ Format as plain text with clear section headers. Return as JSON:
   const raw  = await claudeComplete(system, user, 3000);
   const parsed = JSON.parse(raw.replace(/^```json\s*/m, '').replace(/\s*```$/m, '').trim()) as { subject_line: string; full_draft: string };
 
+  // Replace link placeholders with real blog URLs if available
+  let resolvedDraft = parsed.full_draft;
+  if (blogUrlMap) {
+    const heroUrl = blogUrlMap.get(hero.pkg.id);
+    if (heroUrl) resolvedDraft = resolvedDraft.replace(/\[HERO_LINK\]/g, heroUrl);
+    supporting.slice(0, 5).forEach((s, i) => {
+      const url = blogUrlMap.get(s.pkg.id);
+      if (url) resolvedDraft = resolvedDraft.replace(new RegExp(`\\[LINK_${i + 1}\\]`, 'g'), url);
+    });
+  }
+
   return {
-    subject:      parsed.subject_line,
-    draft:        parsed.full_draft,
-    heroId:       hero.pkg.id,
+    subject:       parsed.subject_line,
+    draft:         resolvedDraft,
+    heroId:        hero.pkg.id,
     supportingIds: supporting.slice(0, 5).map(s => s.pkg.id),
   };
 }
@@ -171,7 +201,14 @@ async function main(): Promise<void> {
   const researchStories = await getResearchStories();
   console.log(`[Newsletter Editor] Research stories loaded`);
 
-  const { subject, draft, heroId, supportingIds } = await generateNewsletter(packages, researchStories);
+  // Resolve live blog URLs for packages before assembly
+const blogUrlMap = new Map<string, string>();
+for (const { pkg } of [...(heroRef ? [heroRef] : []), ...supporting]) {
+  const url = await getBlogUrlForPackage(pkg.id);
+  if (url) blogUrlMap.set(pkg.id, url);
+}
+
+const { subject, draft, heroId, supportingIds } = await generateNewsletter(packages, researchStories, blogUrlMap);
 
   await addRows(ND.table_id, [[
     { column: ND.columns.subject_line,    value: subject },

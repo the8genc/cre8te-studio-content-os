@@ -1,7 +1,7 @@
 {
   "name": "cre8te-studio-content-os",
   "version": "1.0.0",
-  "description": "AI-powered content operating system for Cre8te Studio — 8 agents in TypeScript/Node",
+  "description": "AI-powered content operating system for Cre8te Studio \u2014 8 agents in TypeScript/Node",
   "type": "module",
   "engines": {
     "node": ">=20.0.0"
@@ -32,7 +32,10 @@
     "test:phase2": "tsx tests/run-phase2.ts",
     "test:phase3": "npx tsx tests/phase3/test-publisher.ts",
     "test:integration": "npx tsx tests/integration/test-approval-loop.ts && npx tsx tests/integration/test-full-pipeline.ts",
-    "add-playbook-columns": "tsx scripts/add-playbook-columns.ts"
+    "add-playbook-columns": "tsx scripts/add-playbook-columns.ts",
+    "editorial": "tsx agents/11-editorial-agent/editorial.ts",
+    "sponsor": "tsx agents/12-sponsor-agent/sponsor.ts",
+    "guest-research": "tsx agents/13-guest-research-agent/guest-research.ts"
   },
   "dependencies": {
     "dotenv": "^16.6.1",

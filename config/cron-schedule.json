@@ -58,6 +58,24 @@
       "description": "Sunday 4am \u2014 full regression suite, always sends weekly report email",
       "script": "agents/09-testing-agent/testing-agent.ts",
       "mode": "weekly"
+    },
+    "editorial_agent": {
+      "schedule": "0 10 * * *",
+      "description": "Daily 10am \u2014 process newly transcribed Mini Pod episodes into editorial packages",
+      "script": "agents/11-editorial-agent/editorial.ts",
+      "mode": "auto"
+    },
+    "sponsor_weekly": {
+      "schedule": "0 7 * * 0",
+      "description": "Sunday 7am \u2014 weekly internal sponsor performance digest",
+      "script": "agents/12-sponsor-agent/sponsor.ts",
+      "mode": "weekly"
+    },
+    "sponsor_monthly": {
+      "schedule": "0 8 1 * *",
+      "description": "1st of month 8am \u2014 monthly partner-facing reports (requires human review before sending)",
+      "script": "agents/12-sponsor-agent/sponsor.ts",
+      "mode": "monthly"
     }
   }
 }

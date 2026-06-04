@@ -50,6 +50,8 @@ const SUITES: SuiteDef[] = [
   { name: 'Content Writer',          script: 'tests/agents/test-writer.ts',            tier: 1, tags: ['daily', 'weekly'] },
   { name: 'Newsletter Editor',       script: 'tests/agents/test-newsletter.ts',        tier: 1, tags: ['daily', 'weekly'] },
   { name: 'Publisher',               script: 'tests/phase3/test-publisher.ts',         tier: 1, tags: ['daily', 'weekly'] },
+  { name: 'Editorial Agent',         script: 'tests/agents/test-editorial.ts',         tier: 1, tags: ['daily', 'weekly'] },
+  { name: 'Guest Research Agent',    script: 'tests/agents/test-guest-research.ts',    tier: 1, tags: ['daily', 'weekly'] },
   // Tier 2 — Integration
   { name: 'Approval Loop (Phase 2)', script: 'tests/integration/test-approval-loop.ts', tier: 2, tags: ['daily', 'weekly'] },
   // Tier 3 — Weekly regression only

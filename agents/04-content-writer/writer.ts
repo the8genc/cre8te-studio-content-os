@@ -21,6 +21,16 @@ interface ContentPackage {
   tiktok_script:     string;
   facebook_post:     string;
   newsletter_blurb:  string;
+  // Blog post — long-form version for Framer CMS
+  blog_title:        string;
+  blog_excerpt:      string;  // 2-3 sentences for SEO meta + blog index
+  blog_body:         string;  // full HTML post body, 600-900 words
+  blog_category:     string;
+  blog_tags:         string;  // comma-separated
+  blog_seo_title:    string;
+  blog_seo_description: string;
+  is_paywalled:      boolean; // true = gated content for subscribers
+  paywall_teaser:    string;  // first ~300 chars shown to non-subscribers
 }
 
 // Extracted from idea row — drives framework and CTA selection
@@ -85,7 +95,13 @@ LINKEDIN SPECIFIC:
 - No em-dashes anywhere in the post
 - 3 hashtags max
 - 210 chars visible before "see more" — the hook IS the ad
-- Apply the ${ctx.framework} framework for this post's structure`;
+- Apply the ${ctx.framework} framework for this post's structure.
+
+BLOG POST GENERATION:
+For Authority and Growth bucket content, you MUST also write a full blog post for the
+Cre8te Studio website (Framer CMS). This turns every social post into a permanent,
+SEO-indexed owned media asset. Authority posts may be paywalled (deeper systems/frameworks);
+Growth posts are free (broad appeal, SEO traffic drivers).`;
 
   const user = `Write a complete content package for this approved angle.
 
@@ -116,8 +132,27 @@ Write all 6 outputs. Return JSON only:
   "linkedin_post": "hook (<=210 chars, insight stated plainly)\\n\\nbody\\n\\n#tag1 #tag2 #tag3",
   "tiktok_script": "HOOK (0-2s): ...\\n\\nSCRIPT:\\n- point 1\\n- point 2\\n- point 3\\n\\nCAPTION: short caption #hashtag",
   "facebook_post": "conversational opening\\n\\nbody with warmth\\n\\nengagement question?",
-  "newsletter_blurb": "2-3 sentence warm, insider-tone blurb. Standalone readable. No link teaser."
+  "newsletter_blurb": "2-3 sentence warm, insider-tone blurb. Standalone readable. No link teaser.",
+  "blog_title": "SEO-optimised blog post title (different from LinkedIn hook — more complete, searchable)",
+  "blog_excerpt": "2-3 sentence excerpt for blog index and SEO meta description. Standalone, compelling.",
+  "blog_body": "Full HTML blog post, 600-900 words. Structure: <h2> subheadings, <p> paragraphs, <ul>/<ol> for lists. Open with the hook story. Build to the framework or insight. Close with community CTA. Grounded in the source transcript — quote the speaker directly.",
+  "blog_category": "One of: Community, Creator Economy, Strategy, Tools, Behind The Scenes, Member Stories",
+  "blog_tags": "3-5 comma-separated tags, lowercase, no spaces (e.g. 'personal-branding,creator-economy,linkedin')",
+  "blog_seo_title": "≤60 chars. Include primary keyword. Different from the post title if needed.",
+  "blog_seo_description": "≤160 chars. What the reader gets from reading this post. Action-oriented.",
+  "is_paywalled": false,
+  "paywall_teaser": "First ~300 chars of the blog body that free visitors will see before the gate"
 }
+
+BLOG POST RULES:
+- Paywalled (is_paywalled: true): deeper frameworks, exclusive data, step-by-step systems,
+  member-only insights. Set paywall_teaser to the hook section that makes them want more.
+- Free (is_paywalled: false): community stories, broad insights, top-of-funnel content,
+  anything with SEO value that grows the owned audience.
+- Authority bucket content → always generate a blog post (paywalled or free based on depth)
+- Growth bucket content → free blog post (SEO value, community reach)
+- Conversion bucket content → no blog post (these stay social-only)
+- Blog body must quote the speaker directly at least once — authenticity is the differentiator
 
 VOICE RULES:
 - Ground every script in the specific transcript moment (quote or direct reference)
@@ -162,8 +197,17 @@ async function processIdea(idea: CodaRow, kbContext: string): Promise<void> {
     { column: CP.columns.linkedin_post,    value: pkg.linkedin_post },
     { column: CP.columns.tiktok_script,    value: pkg.tiktok_script },
     { column: CP.columns.facebook_post,    value: pkg.facebook_post },
-    { column: CP.columns.newsletter_blurb, value: pkg.newsletter_blurb },
-    { column: CP.columns.publish_status,   value: 'Draft' },
+    { column: CP.columns.newsletter_blurb,     value: pkg.newsletter_blurb     },
+    { column: CP.columns.blog_title,           value: pkg.blog_title           },
+    { column: CP.columns.blog_excerpt,         value: pkg.blog_excerpt         },
+    { column: CP.columns.blog_body,            value: pkg.blog_body            },
+    { column: CP.columns.blog_category,        value: pkg.blog_category        },
+    { column: CP.columns.blog_tags,            value: pkg.blog_tags            },
+    { column: CP.columns.blog_seo_title,       value: pkg.blog_seo_title       },
+    { column: CP.columns.blog_seo_description, value: pkg.blog_seo_description },
+    { column: CP.columns.is_paywalled,         value: pkg.is_paywalled         },
+    { column: CP.columns.paywall_teaser,       value: pkg.paywall_teaser       },
+    { column: CP.columns.publish_status,       value: 'Draft'                  },
   ]]);
 
   console.log(`    ✓ Package created: ${pkg.package_title}`);
