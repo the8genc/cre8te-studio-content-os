@@ -47,6 +47,9 @@ department.
 - Published URLs → Content Packages table, `Published Links` field
 - Analytics → Analytics Log table
 - Voice learnings → Brand Voice Knowledge Base table
+- Every Coda write is auto-mirrored by `lib/sync.ts` →
+  `docs/coda-doc-snapshot.md` (🔄 Sync Log) + ZeroDB memory
+  (session `cre8te-coda-sync`). Do not bypass `lib/coda.ts` for writes.
 
 ## Coda Configuration
 - Doc ID: `ktMUNdlobR`

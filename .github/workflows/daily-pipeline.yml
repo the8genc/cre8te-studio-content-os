@@ -33,6 +33,8 @@ on:
 jobs:
   run-agent:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # commit Coda sync log back to docs/coda-doc-snapshot.md
     steps:
       - uses: actions/checkout@v4
 
@@ -62,6 +64,8 @@ jobs:
           GOOGLE_DRIVE_ITL_FOLDER_ID:      ${{ secrets.GOOGLE_DRIVE_ITL_FOLDER_ID }}
           POSTIZ_API_KEY:                  ${{ secrets.POSTIZ_API_KEY }}
           KIT_API_KEY:                     ${{ secrets.KIT_API_KEY }}
+          ZERODB_API_KEY:                  ${{ secrets.ZERODB_API_KEY }}
+          ZERODB_MCP_URL:                  ${{ secrets.ZERODB_MCP_URL }}
           INPUT_AGENT:                     ${{ github.event.inputs.agent || 'pipeline' }}
           REPORT_EMAIL:                    ${{ secrets.REPORT_EMAIL }}
           AGENT_EMAIL:                     ${{ secrets.AGENT_EMAIL }}
@@ -98,4 +102,17 @@ jobs:
             npm run newsletter
           else
             npm run publisher
+          fi
+
+      - name: Commit Coda sync log back to repo
+        # lib/sync.ts appends every Coda write to docs/coda-doc-snapshot.md.
+        # Persist it so the snapshot stays current across CI runs.
+        if: always()
+        run: |
+          if ! git diff --quiet docs/coda-doc-snapshot.md 2>/dev/null; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add docs/coda-doc-snapshot.md
+            git commit -m "chore: Coda write sync log [skip ci]"
+            git pull --rebase origin main && git push
           fi

@@ -1,7 +1,10 @@
 /**
  * Coda API client — shared across all agents
+ * Every successful write is mirrored to docs/coda-doc-snapshot.md and ZeroDB
+ * via lib/sync.ts (disable with CODA_SYNC_DISABLED=1).
  */
 import 'dotenv/config';
+import { recordCodaWrite } from './sync.js';
 
 const CODA_API_KEY = process.env.CODA_API_KEY!;
 const CODA_DOC_ID  = process.env.CODA_DOC_ID ?? 'ktMUNdlobR';
@@ -48,6 +51,12 @@ export async function addRows(
     method: 'POST', headers, body: JSON.stringify(payload),
   });
   if (!res.ok) throw new Error(`Coda addRows [${tableId}]: ${res.status} ${await res.text()}`);
+  await recordCodaWrite({
+    action: 'add',
+    tableId,
+    rowCount: rows.length,
+    columns: [...new Set(rows.flat().map(c => c.column))],
+  });
 }
 
 /** Update a single row by ID */
@@ -61,6 +70,12 @@ export async function updateRow(
     method: 'PUT', headers, body: JSON.stringify(payload),
   });
   if (!res.ok) throw new Error(`Coda updateRow [${rowId}]: ${res.status} ${await res.text()}`);
+  await recordCodaWrite({
+    action: 'update',
+    tableId,
+    rowId,
+    columns: cells.map(c => c.column),
+  });
 }
 
 /** Sleep helper */
