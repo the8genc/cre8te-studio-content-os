@@ -6,7 +6,7 @@
 import 'dotenv/config';
 import { getRows, addRows, sleep } from '../../lib/coda.js';
 import { claudeComplete } from '../../lib/anthropic.js';
-import schema from '../../config/coda-schema.json' assert { type: 'json' };
+import schema from '../../config/coda-schema.json' with { type: 'json' };
 
 const CP  = schema.tables.content_packages;
 const AL  = schema.tables.analytics_log;

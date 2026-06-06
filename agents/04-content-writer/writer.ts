@@ -5,8 +5,8 @@
 import 'dotenv/config';
 import { getRows, addRows, updateRow, sleep, type CodaRow } from '../../lib/coda.js';
 import { claudeComplete, parseJsonResponse } from '../../lib/anthropic.js';
-import platformSpecs from '../../config/platform-specs.json' assert { type: 'json' };
-import schema from '../../config/coda-schema.json' assert { type: 'json' };
+import platformSpecs from '../../config/platform-specs.json' with { type: 'json' };
+import schema from '../../config/coda-schema.json' with { type: 'json' };
 
 const CI  = schema.tables.content_ideas;
 const SA  = schema.tables.source_assets;

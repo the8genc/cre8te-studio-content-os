@@ -6,8 +6,8 @@
 import 'dotenv/config';
 import { getRows, addRows, sleep } from '../../lib/coda.js';
 import { claudeComplete } from '../../lib/anthropic.js';
-import researchTopics from '../../config/research-topics.json' assert { type: 'json' };
-import schema from '../../config/coda-schema.json' assert { type: 'json' };
+import researchTopics from '../../config/research-topics.json' with { type: 'json' };
+import schema from '../../config/coda-schema.json' with { type: 'json' };
 
 const CP  = schema.tables.content_packages;
 const BP  = schema.tables.blog_posts;

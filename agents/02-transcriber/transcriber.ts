@@ -5,7 +5,7 @@
 import 'dotenv/config';
 import { getRows, updateRow, sleep, type CodaRow } from '../../lib/coda.js';
 import { uploadAudio, pollTranscript, formatTranscript } from '../../lib/fireflies.js';
-import schema from '../../config/coda-schema.json' assert { type: 'json' };
+import schema from '../../config/coda-schema.json' with { type: 'json' };
 
 const SA    = schema.tables.source_assets;
 const TABLE = SA.table_id;

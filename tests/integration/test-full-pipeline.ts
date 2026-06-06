@@ -8,7 +8,7 @@ import { seedTable, dumpTable, resetStore, addRows, updateRow, getRows } from '.
 import { claudeComplete, parseJsonResponse } from '../../lib/mock-anthropic.js';
 import { mockPostizPublish, mockKitSend, resetPublisherStore, getPublishedPosts, getSentNewsletters } from '../../lib/mock-publisher.js';
 import { SAMPLE_ASSET, SAMPLE_KB_ENTRIES, SAMPLE_RESEARCH_ITEMS } from '../fixtures/sample-transcript.js';
-import schema from '../../config/coda-schema.json' assert { type: 'json' };
+import schema from '../../config/coda-schema.json' with { type: 'json' };
 
 const SA = schema.tables.source_assets;
 const CI = schema.tables.content_ideas;

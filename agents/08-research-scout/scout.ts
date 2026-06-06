@@ -7,8 +7,8 @@ import 'dotenv/config';
 import { addRows, sleep, type CodaCell } from '../../lib/coda.js';
 import { claudeComplete, parseJsonResponse } from '../../lib/anthropic.js';
 import { runActor, type ApifyItem } from '../../lib/apify.js';
-import researchTopics from '../../config/research-topics.json' assert { type: 'json' };
-import schema from '../../config/coda-schema.json' assert { type: 'json' };
+import researchTopics from '../../config/research-topics.json' with { type: 'json' };
+import schema from '../../config/coda-schema.json' with { type: 'json' };
 
 const RI_TABLE = schema.tables.research_intelligence.table_id;
 const RI_COLS  = schema.tables.research_intelligence.columns;

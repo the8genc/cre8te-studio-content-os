@@ -8,7 +8,7 @@ import {
   mockPostizPublish, mockKitSend, resetPublisherStore,
   getPublishedPosts, getSentNewsletters, injectFailure,
 } from '../../lib/mock-publisher.js';
-import schema from '../../config/coda-schema.json' assert { type: 'json' };
+import schema from '../../config/coda-schema.json' with { type: 'json' };
 
 const CP = schema.tables.content_packages;
 const ND = schema.tables.newsletter_drafts;

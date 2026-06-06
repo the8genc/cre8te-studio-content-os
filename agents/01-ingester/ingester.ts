@@ -5,7 +5,7 @@
 import 'dotenv/config';
 import { google } from 'googleapis';
 import { addRows, getRows, sleep } from '../../lib/coda.js';
-import schema from '../../config/coda-schema.json' assert { type: 'json' };
+import schema from '../../config/coda-schema.json' with { type: 'json' };
 
 const SA    = schema.tables.source_assets;
 const TABLE = SA.table_id;
